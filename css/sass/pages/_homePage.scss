@@ -139,29 +139,103 @@
       &:hover .dark-icon {
         display: none;
       }
-      &:hover > .img-icon img.light-icon  {
+      &:hover > .img-icon img.light-icon {
         display: block;
         opacity: 1;
       }
     }
   }
 }
-.brands{
+.brands {
   padding-top: $padding-top;
   padding-bottom: $padding-bottom;
-  .wrapper-brands{
+  .wrapper-brands {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .brand{
+    .brand {
       background-color: $color-white;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-basis: calc((100% / 5) - 10px);
       margin: 0 5px;
-      .img-brand{
+      .img-brand {
         padding: 20px;
+      }
+    }
+  }
+}
+.blog {
+  padding-top: $padding-top;
+  padding-bottom: $padding-bottom;
+  .wrapper-blog {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: $padding-top;
+    padding-bottom: $padding-bottom;
+    .big-post {
+      flex-basis: 50%;
+      margin-right: 40px;
+      margin-top: 28px;
+      .img {
+        margin-bottom: 20px;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          top: -30px;
+          right: -30px;
+          z-index: -1;
+          border-radius: 5px;
+          border: 5px solid $color-border;
+        }
+        img {
+          border-radius: 5px;
+        }
+      }
+    }
+    .posts {
+      flex-basis: 50%;
+      > .post {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 40px;
+        .img {
+          img {
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+    .text-post {
+      padding: 0 15px;
+      .date {
+        span {
+          font-size: 14px;
+        }
+      }
+      h4 {
+        margin: 15px 0;
+        a {
+          color: $color-black;
+          font-size: 24px;
+          transition: all 0.3s linear;
+          &:hover {
+            color: $main-color;
+          }
+        }
+      }
+      p {
+        color: $color-light-gray;
+        line-height: 24px;
+        margin-bottom: 15px;
       }
     }
   }
