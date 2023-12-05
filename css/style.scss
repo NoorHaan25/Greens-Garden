@@ -1,10 +1,22 @@
 @import"./sass/helpers/variables";
 @import"./sass/helpers/mixins";
 @import"./sass/layout/grid";
-@import"./sass/components/headings";
+@import"./sass/components/headings-border-bottom";
+@import"./sass/components/headings-border-left";
+@import"./sass/components/card-product";
+@import "./sass/components/nav-links-page";
+@import "./sass/components/aside";
 @import"./sass/helpers/functions";
 @import"./sass/pages/globalPage";
 @import"./sass/layout/header";
 @import"./sass/pages/homePage";
+@import"./sass/pages/_blogPage";
+@import"./sass/pages/flowersPage";
+@import"./sass/pages/cartPage";
 @import"./sass/layout/footer";
 @import "./sass/components/buttons";
+@import "./sass/components/button-add";
+@import "./sass/helpers/classes";
+
+
+

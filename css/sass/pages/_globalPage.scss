@@ -4,6 +4,15 @@
   box-sizing: border-box;
   text-decoration: none;
 }
+::-webkit-scrollbar{
+  width: 5px;
+}
+::-webkit-scrollbar-track{
+  background-color: #fff;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #e5e5e5;
+}
 body{
   font: {
     family: 'Jost', sans-serif;

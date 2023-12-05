@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/all.min.css" />
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- icon -->
+  <link rel="icon" href="./img/favicon.ico">
+  <title>Greens Garden</title>
+</head>
+<body>
+  <!-- start header -->
+  <header>
+    <div class="container">
+      <div class="wrapper-header">
+        <div class="wrraper-shopping-cart">
+          <div class="shopping-cart">
+            <div class="img-icon">
+              <img src="./img/shopping-bag.png" alt="shopping-bag" />
+            </div>
+            <div class="text-shop" id="dropdown">
+              <div class="title">
+                <span>Shopping Cart</span>
+              </div>
+              <div class="total-price">
+                <span>$34.27 </span>
+                <span>-</span>
+                <span id="number-product">0<span></span>item</span>
+              </div>
+              
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu">
+              <p id="empty-products">There are no items in your cart.</p>
+              <div class="items" id="exist-products">
+                <ul id="cart-products"></ul>
+                <div class="total">
+                  <span>total</span>
+                  <span id="total">325$</span>
+                </div>
+                <div class="buttons">
+                  <button><a href="#">check out</a></button>
+                  <button><a href="./cart.html">View Cart</a></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="logo">
+          <div class="img">
+            <img src="./img/logo.jpg" alt="logo-img" />
+          </div>
+        </div>
+        <div class="icons-header">
+          <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div class="nav" id="bars">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper-nav-bar" id="navbar">
+        <div class="nav-bar" id="navbar-links">
+          <div class="top-nav-bar">
+            <i class="fa-solid fa-xmark" id="close"></i>
+          </div>
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="./blog.html">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- end header -->
+  <section class="nav-links-page">
+    <div class="container">
+      <div class="links-page">
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <span>/</span>
+          <li><a href="./flowers-products.html" class="active">Flowers</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- start section flowers -->
+    <!-- start section footer -->
+    <section class="flowers">
+      <div class="container">
+        <div class="wrapper-flowers">
+          <aside>
+            <div class=" box">
+              <div class="head-box">
+                <h3><a href="#">FLOWERS</a></h3>
+              </div>
+              <div class="body-box">
+                <ul>
+                  <li>
+                    <a href="#">Monsoon</a>
+                    <span>+</span>
+                  </li>
+                  <li>
+                    <a href="#">Summer</a>
+                    <span>+</span>
+                  </li>
+                  <li>
+                    <a href="#">Winter</a>
+                    <span>+</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="box">
+              <div class="head-box">
+                <h3><a href="#">FILTER BY</a></h3>
+              </div>
+              <div class="body-box">
+                
+                <ul class="filter-products">
+                  <h4 class="heading-list">Categories</h4>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Monsoon</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Summer</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Winter</label>
+                  </li>
+                </ul>
+                <ul class="filter-products">
+                  <h4 class="heading-list">Size</h4>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">S</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">M</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">L</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">XL</label>
+                  </li>
+                </ul>
+                <ul class="filter-products">
+                  <h4 class="heading-list">Color</h4>
+                  <li>
+                    <input type="radio" id="all" name="Color" value="vegetables">
+                    <label for="all">Baby Blue</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Orange</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Red</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Pink</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Purple</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="all" name="category" value="vegetables">
+                    <label for="all">Yellow</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+          <div class="products" id="products">
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end section flowers -->
+    <footer>
+      <div class="container">
+        <div class="wrapper-footer">
+          <div class="col">
+            <div class="groups-link">
+              <div class="group-link"">
+                  <h3>INFORMATION</h3>
+                  <ul>
+                    <li><a href=" #">Delivery</a></li>
+                <li><a href="#">Legal Notice</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Secure Payment</a></li>
+                <li><a href="#">Contact Us</a></li>
+                </ul>
+              </div>
+              <div class="group-link"">
+                  <h3>MY ACCOUNT</h3>
+                  <ul>
+                    <li><a href=" #">Personal Info</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Credit Slips</a></li>
+                <li><a href="#">Addresses</a></li>
+                <li><a href="#">My Wishlists</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="img">
+              <img src="./img/logo-light.png" alt="logo">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt lorem consectetur
+              tempor incididunt enim ad minim simply random text. It has pieceveniam.</p>
+            <div class="social-media">
+              <i class="fa-brands fa-facebook-f"></i>
+              <i class="fa-brands fa-twitter"></i>
+              <i class="fa-brands fa-google-plus-g"></i>
+              <i class="fa-brands fa-linkedin"></i>
+              <i class="fa-brands fa-pinterest-p"></i>
+            </div>
+          </div>
+          <div class="col">
+            <h3>NEWSLETTER</h3>
+            <p>Subscribe to our newsletters now and stay up to date with new collections and exclusive offers.</p>
+            <div class="input-email">
+              <input type="email" name="email" id="email" placeholder="Your email address">
+              <button><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end section footer -->
+    
+    <!-- <script type="module" src="./javascript/addProducts.js"></script> -->
+    <script src="./javascript/flowers-products.js" type="module"></script>
+</body>
+</html>
