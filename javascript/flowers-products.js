@@ -9,7 +9,7 @@ const cartProducts = document.getElementById("cart-products");
 let productsFlowers=[];
 console.log(emptyProducts , existProducts);
 let getData = async function(){
-  const response = await fetch(" http://localhost:3000/products");
+  const response = await fetch("https://api-flowers-77y6.onrender.com/products");
   const data = await response.json();
 console.log(data);
 let listOfData = data['baby-flowers']
@@ -182,3 +182,4 @@ dropDown.addEventListener('click',()=>{
   console.log('dropDownMenu', dropdDownMenu);
   dropdDownMenu.classList.toggle('menu-open')
 })
+

@@ -1,7 +1,6 @@
 import { openedNavbar , closedNavbar} from "./navbar.js";
 openedNavbar()
 closedNavbar()
-
 /*                                             start section countdown                                                */
 let countDown =new Date("jan,1 2024 24:00:00").getTime();
 let count=setInterval(() => {

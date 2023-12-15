@@ -14,6 +14,7 @@
   <link rel="icon" href="./img/favicon.ico">
   <title>Greens Garden</title>
 </head>
+
 <body>
   <!-- start header -->
   <header>
@@ -33,7 +34,7 @@
                 <span>-</span>
                 <span id="number-product">0<span></span>item</span>
               </div>
-              
+
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
               <p id="empty-products">There are no items in your cart.</p>
@@ -81,29 +82,141 @@
     </div>
   </header>
   <!-- end header -->
-  <section class="nav-links-page">
+  <section class="check-out">
     <div class="container">
-      <div class="links-page">
-        <ul>
-          <li><a href="./index.html">Home</a></li>
-          <span>/</span>
-          <li><a href="./cart.html" class="active">Cart</a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <!-- start section flowers -->
-  <section class="cart">
-    <div class="container">
-      <div class="wrapper-cart">
+      <div class="wrapper-checkout">
         <div class="col">
-          <div class="shopping-cart">
-            <div class="heading-cart">
-              <h1>Shopping Cart</h1>
+          <div class="personal-information">
+            <div class="heading-info">
+              <h1>Personal Information</h1>
             </div>
-            <ul id="cart">
-              
+            <ul class="nav">
+              <li id="guest">Order as a guest</li>
+              <li>|</li>
+              <li id="sign-in">Sign in</li>
             </ul>
+            <form action="" id="info-client">
+              <div class="block-input">
+                <div class="col">
+                  <span>Social title</span>
+                </div>
+                <div class="col">
+                  <ul class="check-box">
+                    <li>
+                      <input type="radio" name="gender" id="mr" value="mr">
+                      <label for="mr" class="radio">Mr.</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="gender" id="mrs" value="mrs">
+                      <label for="mrs" class="radio">Mrs.</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="block-input">
+                <div class="col">
+                  <label for="first-name">First name</label>
+                </div>
+                <div class="col">
+                  <div class="wrapper-input">
+                    <div class="wrapper-valid-input">
+                      <input type="text" name="first-name" id="first-name">
+                      <span class="valid-icon">✔️</span>
+                    </div>
+                    <p>Only letters and the dot (.) character, followed by a space, are allowed.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="block-input">
+                <div class="col">
+                  <label for="last-name">Last name</label>
+                </div>
+                <div class="col">
+                  <div class="wrapper-input">
+                    <div class="wrapper-valid-input">
+                      <input type="text" name="last-name" id="last-name">
+                      <span class="valid-icon">✔️</span>
+                    </div>
+                    
+                    <p>Only letters and the dot (.) character, followed by a space, are allowed.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="block-input">
+                <div class="col">
+                  <label for="email">Email</label>
+                </div>
+                <div class="col">
+                  <div class="wrapper-input">
+                    <div class="wrapper-valid-input">
+                      <input type="email" name="email" id="email">
+                      <span class="valid-icon">✔️</span>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="account">
+              <span>Create an account </span>
+              <span>(optional)</span>
+              <br />
+              <span>And save time on your next order!</span>
+            </div>
+            <div class="block-input">
+              <div class="col">
+                <label for="password">Password</label>
+              </div>
+              <div class="col">
+                <div class="wrapper-input ">
+                  <div class="input-option">
+                    <input type="password" name="password" id="password" form="info-client">
+                    <button id="button">Show</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="block-input ">
+              <div class="col">
+                <label for="birthdate">Birthdate</label>
+              </div>
+              <div class="col">
+                <div class="wrapper-input">
+                  <div class="input-option">
+                    <input type="text" name="birthdate" id="birthdate" placeholder="MM/DD/YYYY" form="info-client">
+                  </div>
+                  <p>(E.g.: 05/31/1970)</p>
+                </div>
+              </div>
+            </div>
+            <div class="block-input options">
+              <div class="col"></div>
+              <div class="col">
+                <div class="wrapper-option">
+                  <input type="radio" name="order" id="data-privacy" form="info-client">
+                  <label for="data-privacy" class="radio">Customer data privacy</label>
+                  <br/>
+                  <em>
+                    The personal data you provide is used to answer queries, process orders or allow access to specific information. You have the right to modify and delete all the personal information found in the "My Account" page.
+                  </em>
+                </div>
+                <div class="wrapper-option">
+                  <input type="radio" name="order" id="sign-up" form="info-client">
+                  <label for="sign-up" class="radio">Sign up for our newsletter</label>
+                  <br/>
+                  <em>
+                    You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.
+                  </em>
+                </div>
+                <div class="wrapper-option">
+                  <input type="radio" name="order" id="privacy-policy" form="info-client">
+                  <label for="privacy-policy" class="radio"> I agree to the terms and conditions and the privacy policy</label>
+                </div>
+              </div>
+            </div>
+            <div class="onsubmit">
+              <input type="submit" value="CONTINUE" form="info-client">
+            </div>
           </div>
         </div>
         <div class="col wrapper-info-cart">
@@ -159,6 +272,15 @@
         </div>
       </div>
     </div>
+    <div class="message-order-recieve" id="order-recieve">
+      <div class="card">
+        <div class="img">
+          <img src="./img/package-received.png" alt="package-received">
+        </div>
+        <h3>Thank you! We have recieved your order.</h3>
+        <button id="button-recieve">Ok</button>
+      </div>
+    </div>
   </section>
   <footer>
     <div class="container">
@@ -212,8 +334,8 @@
       </div>
     </div>
   </footer>
-    <!-- end section footer -->
-
-    <script src="./javascript/cart.js"></script>
+  <!-- end section footer -->
+  <script type="module" src="./javascript/checkout.js"></script>
 </body>
+
 </html>
