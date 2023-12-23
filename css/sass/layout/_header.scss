@@ -2,7 +2,28 @@ header {
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: $color-white;
-
+  .top-header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    ul{
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      li{
+        margin: 0 10px;
+        font-size: 14px;
+        i{
+          color: $color-light-gray;
+          margin: 0 3px;
+        }
+        & > span{
+          color: $color-light-gray;
+          display: inline-block;
+          margin: 0 5px;
+        }
+      }
+    }
+  }
   .wrapper-header {
     display: flex;
     align-items: center;
@@ -163,6 +184,7 @@ header {
       top: 0;
       right: 0;
       transition: all 0.5s linear; 
+      // z-index: 55555;
       .top-nav-bar {
         background-color: $main-color;
         width: 100%;

@@ -1,0 +1,18 @@
+.whishlist{
+  
+  padding-top:$padding-top ;
+  padding-bottom:$padding-bottom ;
+  .wrapper-whishlist{
+    display: flex;
+  align-items: center;
+  }
+  .heart{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    padding: 10px 0 0 10px;
+    i{
+      color: $main-color;
+    }
+  }
+}

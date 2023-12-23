@@ -14,6 +14,7 @@
   <link rel="icon" href="./img/favicon.ico">
   <title>Greens Garden</title>
 </head>
+
 <body>
   <!-- start header -->
   <header>
@@ -29,11 +30,11 @@
                 <span>Shopping Cart</span>
               </div>
               <div class="total-price">
-                <span>$34.27 </span>
+                <span>0</span>
                 <span>-</span>
                 <span id="number-product">0<span></span>item</span>
               </div>
-              
+
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
               <p id="empty-products">There are no items in your cart.</p>
@@ -41,7 +42,7 @@
                 <ul id="cart-products"></ul>
                 <div class="total">
                   <span>total</span>
-                  <span id="total">325$</span>
+                  <span id="total">0</span>
                 </div>
                 <div class="buttons">
                   <button><a href="#">check out</a></button>
@@ -72,8 +73,8 @@
           </div>
           <ul>
             <li><a href="./index.html">Home</a></li>
-            <li><a href="#">Category</a></li>
-            <li><a href="#">Shop</a></li>
+            <!-- <li><a href="#">Category</a></li> -->
+            <li><a href="./flowers-products.html">Shop</a></li>
             <li><a href="./blog.html">Blog</a></li>
           </ul>
         </div>
@@ -93,164 +94,233 @@
     </div>
   </section>
   <!-- start section flowers -->
-    <!-- start section footer -->
-    <section class="flowers">
-      <div class="container">
-        <div class="wrapper-flowers">
-          <aside>
-            <div class=" box">
-              <div class="head-box">
-                <h3><a href="#">FLOWERS</a></h3>
-              </div>
-              <div class="body-box">
-                <ul>
-                  <li>
-                    <a href="#">Monsoon</a>
-                    <span>+</span>
-                  </li>
-                  <li>
-                    <a href="#">Summer</a>
-                    <span>+</span>
-                  </li>
-                  <li>
-                    <a href="#">Winter</a>
-                    <span>+</span>
-                  </li>
-                </ul>
-              </div>
+  <!-- start section footer -->
+  <section class="flowers">
+    <div class="container">
+      <div class="wrapper-flowers">
+        <aside>
+          <div class="box">
+            <div class="head-box">
+              <h3><a href="#">FILTER BY</a></h3>
             </div>
-            <div class="box">
-              <div class="head-box">
-                <h3><a href="#">FILTER BY</a></h3>
-              </div>
-              <div class="body-box">
-                
-                <ul class="filter-products">
-                  <h4 class="heading-list">Categories</h4>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Monsoon</label>
+            <div class="body-box">
+
+              <ul class="filter-products">
+                <h4 class="heading-list">Categories</h4>
+                <li>
+                  <input type="radio" id="all" name="category" value="all-flowers">
+                  <label for="all">All Flowers</label>
+                </li>
+                <li>
+                  <input type="radio" id="wedding" name="category" value="wedding">
+                  <label for="wedding">Wedding</label>
+                </li>
+                <li>
+                  <input type="radio" id="happy-birthday" name="category" value="happy-birthday">
+                  <label for="happy-birthday">Happy Birthday</label>
+                </li>
+                <li>
+                  <input type="radio" id="congratulation" name="category" value="congratulation">
+                  <label for="congratulation">Congratulation</label>
+                </li>
+                <li>
+                  <input type="radio" id="happy-anniversary" name="category" value="happy-anniversary">
+                  <label for="happy-anniversary">Happy Anniversary</label>
+                </li>
+                <li>
+                  <input type="radio" id="love-you" name="category" value="love-you">
+                  <label for="love-you">I Love You</label>
+                </li>
+                <li>
+                  <input type="radio" id="thank-you" name=" category" value="thank-you">
+                  <label for="thank-you">Thank You</label>
                   </li>
                   <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Summer</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Winter</label>
-                  </li>
-                </ul>
-                <ul class="filter-products">
-                  <h4 class="heading-list">Size</h4>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">S</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">M</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">L</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">XL</label>
-                  </li>
-                </ul>
-                <ul class="filter-products">
-                  <h4 class="heading-list">Color</h4>
-                  <li>
-                    <input type="radio" id="all" name="Color" value="vegetables">
-                    <label for="all">Baby Blue</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Orange</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Red</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Pink</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Purple</label>
-                  </li>
-                  <li>
-                    <input type="radio" id="all" name="category" value="vegetables">
-                    <label for="all">Yellow</label>
-                  </li>
-                </ul>
-              </div>
+                    <input type="radio" id="baby-flowers" name=" category" value="baby-flowers">
+                    <label for="baby-flowers">Baby Flowers</label>
+                    </li>
+              </ul>
+              <ul class="filter-products">
+                <h4 class="heading-list">Color</h4>
+                <li>
+                  <input type="radio" id="baby-blue" name="color" value="baby-blue">
+                  <label for="baby-blue">Baby Blue</label>
+                </li>
+                <li>
+                  <input type="radio" id="orange" name="color" value="orange">
+                  <label for="orange">Orange</label>
+                </li>
+                <li>
+                  <input type="radio" id="red" name="color" value="red">
+                  <label for="red">Red</label>
+                </li>
+                <li>
+                  <input type="radio" id="pink" name="color" value="pink">
+                  <label for="pink">Pink</label>
+                </li>
+                <li>
+                  <input type="radio" id="purple" name="color" value="purple">
+                  <label for="purple">Purple</label>
+                </li>
+                <li>
+                  <input type="radio" id="yellow" name="color" value="yellow">
+                  <label for="yellow">Yellow</label>
+                </li>
+              </ul>
+              <ul class="filter-products">
+                <h4 class="heading-list">Size</h4>
+                <li>
+                  <input type="radio" id="s" name="size" value="s">
+                  <label for="s">S</label>
+                </li>
+                <li>
+                  <input type="radio" id="m" name="size" value="m">
+                  <label for="m">M</label>
+                </li>
+                <li>
+                  <input type="radio" id="l" name="size" value="l">
+                  <label for="l">L</label>
+                </li>
+                <li>
+                  <input type="radio" id="xl" name="size" value="xl">
+                  <label for="xl">XL</label>
+                </li>
+              </ul>
+
             </div>
-          </aside>
-          <div class="products" id="products">
-            
           </div>
+        </aside>
+        <div class="products" id="products">
+
         </div>
       </div>
-    </section>
-    <!-- end section flowers -->
-    <footer>
-      <div class="container">
-        <div class="wrapper-footer">
-          <div class="col">
-            <div class="groups-link">
-              <div class="group-link"">
+    </div>
+  </section>
+  <!-- end section flowers -->
+  <footer>
+    <div class="container">
+      <div class="wrapper-footer">
+        <div class="col">
+          <div class="groups-link">
+            <div class="group-link"">
                   <h3>INFORMATION</h3>
                   <ul>
                     <li><a href=" #">Delivery</a></li>
-                <li><a href="#">Legal Notice</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Secure Payment</a></li>
-                <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="group-link"">
+              <li><a href="#">Legal Notice</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Secure Payment</a></li>
+              <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="group-link"">
                   <h3>MY ACCOUNT</h3>
                   <ul>
                     <li><a href=" #">Personal Info</a></li>
-                <li><a href="#">Orders</a></li>
-                <li><a href="#">Credit Slips</a></li>
-                <li><a href="#">Addresses</a></li>
-                <li><a href="#">My Wishlists</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="img">
-              <img src="./img/logo-light.png" alt="logo">
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt lorem consectetur
-              tempor incididunt enim ad minim simply random text. It has pieceveniam.</p>
-            <div class="social-media">
-              <i class="fa-brands fa-facebook-f"></i>
-              <i class="fa-brands fa-twitter"></i>
-              <i class="fa-brands fa-google-plus-g"></i>
-              <i class="fa-brands fa-linkedin"></i>
-              <i class="fa-brands fa-pinterest-p"></i>
-            </div>
-          </div>
-          <div class="col">
-            <h3>NEWSLETTER</h3>
-            <p>Subscribe to our newsletters now and stay up to date with new collections and exclusive offers.</p>
-            <div class="input-email">
-              <input type="email" name="email" id="email" placeholder="Your email address">
-              <button><i class="fa-solid fa-arrow-right"></i></button>
+              <li><a href="#">Orders</a></li>
+              <li><a href="#">Credit Slips</a></li>
+              <li><a href="#">Addresses</a></li>
+              <li><a href="#">My Wishlists</a></li>
+              </ul>
             </div>
           </div>
         </div>
+        <div class="col">
+          <div class="img">
+            <img src="./img/logo-light.png" alt="logo">
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt lorem consectetur
+            tempor incididunt enim ad minim simply random text. It has pieceveniam.</p>
+          <div class="social-media">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-google-plus-g"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-pinterest-p"></i>
+          </div>
+        </div>
+        <div class="col">
+          <h3>NEWSLETTER</h3>
+          <p>Subscribe to our newsletters now and stay up to date with new collections and exclusive offers.</p>
+          <div class="input-email">
+            <input type="email" name="email" id="email" placeholder="Your email address">
+            <button><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
       </div>
-    </footer>
-    <!-- end section footer -->
+    </div>
+  </footer>
+  <!-- end section footer -->
+  <!-- start section more details -->
+  <div class="details">
+    <div class="content-details">
+      <div class="card-details">
+        <div class="img-product">
+          <img src="" alt="" class="img-details">
+        </div>
+        <div class="text-card">
+          <h3 class="name-product"></h3>
+          <div class="price">
+            <span class="price-product"></span>
+            <span>EGP</span>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit non tempora magni repudiandae sint suscipit tempore
+            quis maxime explicabo veniam eos reprehenderit fuga
+          </p>
+          <div class="quantity-block">
+            <h4>Quantity</h4>
+            <div class="content">
+              <div class="quantity">
+                <div class="wrapper-button-puls">
+                  <span class="plus">
+                    <i class="fa-solid fa-plus"></i>
+                  </span>
+                </div>
+                <div class="count-content">0</div>
+                <div class="wrapper-button-minus">
+                  <span class="minus">
+                    <i class="fa-solid fa-minus"></i>
+                  </span>
+                </div>
+              </div>
+              <button class='add' >ADD TO CART</button>
+            </div>
+            
+          </div>
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-heart"></i>
+                <span>Add To Wishlist</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-shuffle"></i>
+                <span>Add To Compare</span>
+              </a>
+            </li>
+          </ul>
+        </div>   
+      </div>
+      <div class="close-card-product">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      <div class="share">
+        <span>share:</span>
+        <ul>
+          <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></li>
+        </ul>
+      </div>
+    </div>
     
-    <!-- <script type="module" src="./javascript/addProducts.js"></script> -->
-    <script src="./javascript/flowers-products.js" type="module"></script>
+  </div>
+  </div>
+  <!-- end section details -->
+  <!-- <script type="module" src="./javascript/addProducts.js"></script> -->
+  <script src="./javascript/flowers-products.js" type="module"></script>
 </body>
+
 </html>

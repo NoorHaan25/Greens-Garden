@@ -7,6 +7,10 @@
 @import "./sass/components/nav-links-page";
 @import "./sass/components/aside";
 @import "./sass/components/information-products";
+@import "./sass//components/input-type-radio";
+@import "./sass//components/product-details";
+@import "./sass//components/drop-down";
+@import "./sass//components/form";
 @import"./sass/helpers/functions";
 @import"./sass/pages/globalPage";
 @import"./sass/layout/header";
@@ -15,6 +19,9 @@
 @import"./sass/pages/flowersPage";
 @import"./sass/pages/cartPage";
 @import"./sass/pages/checkoutPage";
+@import"./sass/pages/register";
+@import"./sass/pages/login";
+@import"./sass/pages/wishlist";
 @import"./sass/layout/footer";
 @import "./sass/components/buttons";
 @import "./sass/components/button-add";

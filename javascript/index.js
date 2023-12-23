@@ -1,6 +1,6 @@
-import { openedNavbar , closedNavbar} from "./navbar.js";
-openedNavbar()
-closedNavbar()
+import { openedNavbar , closedNavbar } from "./navbar.js";
+import { dropdDownMenu } from "./dropdown.js";
+
 /*                                             start section countdown                                                */
 let countDown =new Date("jan,1 2024 24:00:00").getTime();
 let count=setInterval(() => {
@@ -20,3 +20,20 @@ if(differenceDate < 0){
 }
 }, 1000);
 /*                                             end section countdown                                                */
+const userName = localStorage.getItem("userName");
+const notExistingAccount = document.getElementById("not-existing-account");
+const existingAccount = document.getElementById("existing-account");
+console.log('userName', userName);
+console.log('index: ' , notExistingAccount , existingAccount);
+if(userName !== null ){
+    console.log('index: ' , userName);
+    notExistingAccount.style.cssText= "display:none;"
+    existingAccount.style.cssText="display:block;"
+}
+else if(userName === null){
+    existingAccount.style.cssText="display:none;"
+    notExistingAccount.style.cssText= "display:block;"
+}
+openedNavbar();
+closedNavbar();
+dropdDownMenu();

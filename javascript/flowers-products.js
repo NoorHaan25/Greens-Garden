@@ -1,30 +1,29 @@
-
+import { dropdDownMenu } from "./dropdown.js";
+import { openedNavbar, closedNavbar } from "./navbar.js";
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-const products = document.getElementById('products');
+let cartFav=[];
+const products = document.getElementById("products");
 const countProduct = document.getElementById("number-product");
 const existProducts = document.getElementById("exist-products");
 const emptyProducts = document.getElementById("empty-products");
 const cartProducts = document.getElementById("cart-products");
-
-let productsFlowers=[];
-console.log(emptyProducts , existProducts);
-let getData = async function(){
-  const response = await fetch("https://api-flowers-77y6.onrender.com/products");
+const total = document.getElementById("total");
+let selectedCategory = "";
+let selectedColor = "";
+let productsFlowers = [];
+let getData = async function () {
+  const response = await fetch("http://localhost:3000/products");
   const data = await response.json();
-console.log(data);
-let listOfData = data['baby-flowers']
-productsFlowers = listOfData;
-display(listOfData);
-}
-getData();
-
-
-function display(listOfData ){
-let templateContent ="";
-// console.log('listOfData' , listOfData);
-for (let i = 0; i < listOfData.length; i++) {
-  // console.log(listOfData[i] );
-  templateContent += `
+  let listOfData = data;
+  productsFlowers = listOfData;
+  display(listOfData);
+  filterByCategory(listOfData);
+  filterByColor(listOfData);
+};
+function display(listOfData) {
+  let templateContent = "";
+  for (let i = 0; i < listOfData.length; i++) {
+    templateContent += `
   <div class="card">
   <div class="icons-card">
     <i class="fa-regular fa-heart"></i>
@@ -46,8 +45,8 @@ for (let i = 0; i < listOfData.length; i++) {
       <h3>${listOfData[i].title}</h3>
     </div>
     <div class="price">
-      <div class="current-price">$11.42 </div>
-      <div class="before-price">$14.28</div>
+      <div class="current-price">${listOfData[i].price} EGP</div>
+      
     </div>
     <div class="add-product">
       <div class="quantity">
@@ -65,43 +64,62 @@ for (let i = 0; i < listOfData.length; i++) {
   </div>
 </div>
   `;
-}
-products.innerHTML=templateContent;
-let buttonAdd =document.querySelectorAll('.button-add');
-let buttonMinus =document.querySelectorAll('.button-minus');
-let buttonPlus =document.querySelectorAll('.button-plus');
-buttonAdd.forEach((el)=>{
-  el.addEventListener('click',function(){
-  let index = el.dataset.index;
-  addCart(index , this , )
+  }
+  products.innerHTML = templateContent;
+  let buttonAdd = document.querySelectorAll(".button-add");
+  let buttonMinus = document.querySelectorAll(".button-minus");
+  let buttonPlus = document.querySelectorAll(".button-plus");
+  let buttonEye = document.querySelectorAll(".fa-eye");
+  let buttonHeart = document.querySelectorAll(".fa-heart");
+  buttonAdd.forEach((el) => {
+    el.addEventListener("click", function () {
+      let index = el.dataset.index;
+      addCart(index, this);
+    });
   });
-})
-buttonPlus.forEach((el)=>{
-  el.addEventListener('click',function(){
-    let countElement = el.parentElement.previousElementSibling;
-    +countElement.innerHTML++
-    //console.log('countele' , countElement);
-    let index = el.dataset.index;
-    console.log(index);
-    update(index, countElement.textContent);
-    getNumbersCounts(countElement.textContent)
-  });
-})
-buttonMinus.forEach((el)=>{
-  el.addEventListener('click',function(){
-    let index = el.dataset.index;
-    let countElement = el.parentElement.previousElementSibling;
-    let countValue = parseInt(countElement.textContent);
-    if (countValue > 1) {
-      countElement.textContent = countValue - 1;
+  buttonPlus.forEach((el) => {
+    el.addEventListener("click", function () {
+      let countElement = el.parentElement.previousElementSibling;
+      +countElement.innerHTML++;
+      let index = el.dataset.index;
+      console.log(index);
       update(index, countElement.textContent);
-      getNumbersCounts(countElement.textContent)
-    }
-
+    });
   });
-})
-
+  buttonMinus.forEach((el) => {
+    el.addEventListener("click", function () {
+      let index = el.dataset.index;
+      let countElement = el.parentElement.previousElementSibling;
+      let countValue = parseInt(countElement.textContent);
+      if (countValue > 1) {
+        countElement.textContent = countValue - 1;
+        update(index, countElement.textContent);
+      }
+    });
+  });
+  buttonEye.forEach((el , index) => {
+    // console.log('eye' , index);
+    el.addEventListener("click", function () {
+      moreDetails(index)
+    })
+  })
+  buttonHeart.forEach((el, index)=>{
+    el.addEventListener("click", function () {
+      // console.log(el , index);
+      const productFavorit = productsFlowers[index];
+      console.log('product' , productFavorit);
+      let findProductFav =cartFav.find(function(productFav){
+        return productFavorit.id===productFav.id
+      })
+      if(!findProductFav){
+        cartFav.push({...productFavorit});
+      }
+      console.log('cartfa' , cartFav);
+      localStorage.setItem('productFavorit',  JSON.stringify(cartFav));
+    })
+  });
 }
+
 function getTotalCount() {
   let totalCount = 0;
   for (const item of cart) {
@@ -109,42 +127,53 @@ function getTotalCount() {
   }
   return totalCount;
 }
-function addCart(index , term ){
-  let choosenProduct = productsFlowers[index];
-  let parentElement= term.parentElement;
-  let counts = parentElement.children[0].children[0].textContent;
-  let findProduct =cart.find(function(product){
-    return product.id===choosenProduct.id
-  })
-  if(findProduct){
-    console.log('isexisting product'); 
-    
-
-  }else{
-    cart.push({...choosenProduct, count:counts , total:0});
-    console.log('not existing product' , cart);
+function getTotalPrice() {
+  let sum = 0;
+  let total = 0;
+  let totalSub = 0;
+  for (const item of cart) {
+    sum = item.price * item.count;
+    totalSub = Math.ceil((total += sum));
   }
-  countProduct.textContent=getTotalCount();
-  localStorage.setItem("cart" , JSON.stringify(cart));
-  getProducts()
+  // console.log('sum = ' + totalSub);
+  return totalSub;
 }
-function update(index , count){
+function addCart(index, term) {
+  let choosenProduct = productsFlowers[index];
+  let parentElement = term.parentElement;
+  let counts = parentElement.children[0].children[0].textContent;
+  let findProduct = cart.find(function (product) {
+    return product.id === choosenProduct.id;
+  });
+  if (findProduct) {
+    console.log("isexisting product");
+  } else {
+    cart.push({ ...choosenProduct, count: counts, total: 0 });
+    console.log("not existing product", cart);
+  }
+  countProduct.textContent = getTotalCount();
+  total.textContent = getTotalPrice();
+  localStorage.setItem("cart", JSON.stringify(cart));
+  getProducts();
+}
+function update(index, count) {
   const chosenProduct = productsFlowers[index];
   const foundProduct = cart.find((product) => product.id === chosenProduct.id);
   if (foundProduct) {
     foundProduct.count = count;
     countProduct.textContent = getTotalCount();
-    localStorage.setItem("cart" , JSON.stringify(cart));
-    getProducts()
+    total.textContent = getTotalPrice();
+    localStorage.setItem("cart", JSON.stringify(cart));
+    getProducts();
   }
 }
-function getProducts(){
-  if(cart.length == 0){
-    console.log('no products found');
-  }else{
-    emptyProducts.style.cssText="display:none;";
-    existProducts.style.cssText="display:block;";
-    console.log(' products found');
+function getProducts() {
+  if (cart.length == 0) {
+    console.log("no products found");
+  } else {
+    emptyProducts.style.cssText = "display:none;";
+    existProducts.style.cssText = "display:block;";
+    console.log(" products found");
     let products = "";
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
@@ -164,22 +193,104 @@ function getProducts(){
           </div>
         </div>
       </li>
-      `
+      `;
     }
-    cartProducts.innerHTML=products;
+    cartProducts.innerHTML = products;
   }
 }
-function getNumbersCounts(textCount){
-  console.log('textCount' , textCount); 
+function applyFilters(products) {
+  let filteredProducts = products;
+
+  if (selectedCategory !== "all-flowers" && selectedCategory !== "") {
+    filteredProducts = products.filter(
+      (product) => product.category === selectedCategory
+    );
+  }
+
+  if (selectedColor !== "") {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.color === selectedColor
+    );
+  }
+  display(filteredProducts);
+}
+function filterByCategory(products) {
+  const category = document.querySelectorAll('input[name="category"]');
+  category.forEach((element) => {
+    element.addEventListener("click", function () {
+      selectedCategory = element.value;
+      applyFilters(products);
+    });
+  });
+}
+function filterByColor(products) {
+  const color = document.querySelectorAll('input[name="color"]');
+  color.forEach((element) => {
+    element.addEventListener("click", function () {
+      selectedColor = element.value;
+      applyFilters(products);
+    });
+  });
 }
 
-/*** dropDowns */
-const dropDown=document.getElementById('dropdown');
+// const size = document.querySelectorAll('input[name="size"]');
+// console.log("out selected", selectedColor);
 
-dropDown.addEventListener('click',()=>{
- // console.log('dropDown', dropDown);
-  const dropdDownMenu = document.getElementById('dropdown-menu');
-  console.log('dropDownMenu', dropdDownMenu);
-  dropdDownMenu.classList.toggle('menu-open')
-})
-
+function moreDetails(index){
+  console.log('index' , index);
+  let imgDetails= document.querySelector(".img-details");
+   let details=document.querySelector(".details");
+   let nameProduct = document.querySelector(".name-product");
+    let price = document.querySelector(".price-product");
+    let count = document.querySelector(".count-content");
+    let countNumber = count.innerHTML
+    let buttonAdd = document.querySelector(".add");
+    let buttonPlusDetails = document.querySelector(".plus");
+    let buttonMinusDetails = document.querySelector(".minus");
+    let choosenProduct = productsFlowers[index];
+    buttonPlusDetails.addEventListener("click", function () {
+      +countNumber++;
+      count.innerHTML = countNumber;
+     
+   });
+   buttonMinusDetails.addEventListener("click", function () {
+  
+    if (countNumber > 1) {
+      +countNumber--
+      count.textContent = countNumber;
+    }
+   })
+    buttonAdd.addEventListener("click", function () {
+      let findProduct = cart.find(function (product) {
+        return product.id === choosenProduct.id;
+      });
+      if (findProduct) {
+        console.log("isexisting product");
+      } else {
+        cart.push({ ...choosenProduct, count: countNumber, total: 0 });
+        console.log("not existing product", cart);
+      }
+      countProduct.textContent = getTotalCount();
+      total.textContent = getTotalPrice();
+      localStorage.setItem("cart", JSON.stringify(cart));
+      getProducts();
+    })
+   
+  
+   
+  let closeCardPro=document.querySelector(".close-card-product");
+  imgDetails.src= productsFlowers[index].img;
+  imgDetails.alt= productsFlowers[index].title;
+  nameProduct.textContent = productsFlowers[index].title;
+  price.textContent = productsFlowers[index].price;
+  details.style.cssText="display:flex;"
+  closeCardPro.addEventListener("click" ,  function(){
+    details.style.cssText="display:none;"
+  })
+}
+total.textContent = getTotalPrice();
+getData();
+getProducts();
+dropdDownMenu();
+openedNavbar();
+closedNavbar();
