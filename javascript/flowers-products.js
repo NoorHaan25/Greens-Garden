@@ -10,6 +10,7 @@ const cartProducts = document.getElementById("cart-products");
 const total = document.getElementById("total");
 let selectedCategory = "";
 let selectedColor = "";
+let selectedPrice = "";
 let productsFlowers = [];
 let getData = async function () {
   const response = await fetch("http://localhost:3000/products");
@@ -19,6 +20,7 @@ let getData = async function () {
   display(listOfData);
   filterByCategory(listOfData);
   filterByColor(listOfData);
+  filterByPrice(listOfData);
 };
 function display(listOfData) {
   let templateContent = "";
@@ -207,12 +209,30 @@ function applyFilters(products) {
     );
   }
 
-  if (selectedColor !== "") {
+  if (selectedColor !== "all-colors" && selectedColor !== "") {
     filteredProducts = filteredProducts.filter(
       (product) => product.color === selectedColor
     );
   }
-  display(filteredProducts);
+  if(selectedPrice !== "all-price" && selectedPrice !== ""){
+    filteredProducts = filteredProducts.filter(
+      (product) => {
+        if(product.price < 500 && selectedPrice === 'less-500'){
+          return product;
+        }
+        else if((product.price > 500 && product.price < 1000) && selectedPrice === '500-1000'){
+          return product;
+        }
+        else if((product.price > 1000 && product.price < 1500) && selectedPrice === '1000-1500'){
+          return product;
+        }
+        else if((product.price > 1500) && selectedPrice === 'over1500'){
+          return product;
+        }
+      }
+    );
+  }
+  display(filteredProducts );
 }
 function filterByCategory(products) {
   const category = document.querySelectorAll('input[name="category"]');
@@ -232,9 +252,15 @@ function filterByColor(products) {
     });
   });
 }
-
-// const size = document.querySelectorAll('input[name="size"]');
-// console.log("out selected", selectedColor);
+function filterByPrice(products) {
+  const price = document.querySelectorAll('input[name="price"]');
+  price.forEach((element) => {
+    element.addEventListener("click", function () {
+      selectedPrice = element.value;
+      applyFilters(products);
+    });
+  });
+}
 
 function moreDetails(index){
   console.log('index' , index);
