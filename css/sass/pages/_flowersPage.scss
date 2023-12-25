@@ -2,6 +2,7 @@
   .wrapper-flowers {
     display: flex;
     align-items: flex-start;
+
     aside {
       flex-basis: calc(20% - 10px);
       margin-right: 10px;
@@ -60,21 +61,42 @@
             // }
             // }
 
-            
+
           }
         }
       }
     }
-    .products{
+
+    .products {
       width: 80%;
       display: flex;
       align-items: center;
-          flex-wrap: wrap;
-}
-      .card{
-        flex-basis: calc((100% / 3) - 10px);
-        margin: 5px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      flex-basis: calc((100% / 3) - 10px);
+      margin: 5px;
+    }
+    .pagination{
+      li{
+        padding: 15px;
+        border: 1px solid $color-border;
+        font-weight: 600;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin:5px;
+        border-radius: 50%;
+        cursor: pointer;
+        &.active{
+          background-color: $main-color;
+          color: $color-white;
+        }
       }
+     
     }
   }
-
+}

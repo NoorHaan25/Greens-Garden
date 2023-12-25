@@ -21,6 +21,7 @@ let getData = async function () {
   filterByCategory(listOfData);
   filterByColor(listOfData);
   filterByPrice(listOfData);
+  pagination(listOfData);
 };
 function display(listOfData) {
   let templateContent = "";
@@ -208,7 +209,6 @@ function applyFilters(products) {
       (product) => product.category === selectedCategory
     );
   }
-
   if (selectedColor !== "all-colors" && selectedColor !== "") {
     filteredProducts = filteredProducts.filter(
       (product) => product.color === selectedColor
@@ -233,6 +233,7 @@ function applyFilters(products) {
     );
   }
   display(filteredProducts );
+  pagination(filteredProducts);
 }
 function filterByCategory(products) {
   const category = document.querySelectorAll('input[name="category"]');
@@ -261,7 +262,32 @@ function filterByPrice(products) {
     });
   });
 }
-
+function pagination(allProducts) {
+  const pagination = document.getElementById("wrapper-pagination");
+  pagination.innerHTML = ''; 
+  const product_for_page = 15;
+  const numberProduct = allProducts.length;
+  const pages = Math.ceil(numberProduct / product_for_page);
+  let createUl= document.createElement("ul");
+  createUl.style.cssText="display:flex; width: 100%; justify-content: center;  flex-wrap: wrap;  margin: 10px 0;"
+  createUl.className = "pagination"
+  pagination.appendChild(createUl);
+  const sliceProducts = allProducts.slice(0, product_for_page);
+  display(sliceProducts);
+  for (let i = 1; i <= pages; i++) {
+    let createLi= document.createElement("li");
+    createLi.style.cssText="padding: 15px; border: 1px solid #e5e5e5;font-weight: 600;width: 20px;height: 20px;display: flex;align-items: center;justify-content: center;margin:5px;border-radius: 50%;cursor: pointer;"
+    createLi.textContent = i;
+    createUl.appendChild(createLi);
+    createLi.addEventListener("click" , function(){
+      const startIndexPage = (i - 1 ) * product_for_page ; //return start page
+      const endIndexPage = i * product_for_page;
+      const sliceProducts = allProducts.slice(startIndexPage, endIndexPage);
+      display(sliceProducts)
+      window.scrollTo(0, 0);
+    }) 
+  }
+}
 function moreDetails(index){
   console.log('index' , index);
   let imgDetails= document.querySelector(".img-details");
@@ -314,6 +340,9 @@ function moreDetails(index){
     details.style.cssText="display:none;"
   })
 }
+
+
+
 total.textContent = getTotalPrice();
 getData();
 getProducts();
