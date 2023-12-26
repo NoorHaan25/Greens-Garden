@@ -1372,6 +1372,9 @@ header .show {
   border: 1px solid #e5e5e5;
   margin-right: 15px;
 }
+.deal .wrapper-deal .col:first-child .slider-img .selected img {
+  width: 387px;
+}
 .deal .wrapper-deal .col:first-child .slider-img .wrapper-nav-slider {
   position: relative;
 }
@@ -1401,7 +1404,7 @@ header .show {
 .deal .wrapper-deal .col:first-child .slider-img .wrapper-nav-slider .nav-slider .img img {
   opacity: 0.5;
 }
-.deal .wrapper-deal .col:first-child .slider-img .wrapper-nav-slider .nav-slider .img .active {
+.deal .wrapper-deal .col:first-child .slider-img .wrapper-nav-slider .nav-slider .img .active-img {
   opacity: 1;
 }
 .deal .wrapper-deal .col:last-child {

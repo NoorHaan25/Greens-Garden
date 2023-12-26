@@ -251,6 +251,9 @@
         .selected {
           border: 1px solid $color-border;
           margin-right: 15px;
+          img{
+            width: 387px;
+          }
         }
         .wrapper-nav-slider {
           position: relative;
@@ -277,7 +280,7 @@
               img {
                 opacity: 0.5;
               }
-              .active {
+              .active-img{
                 opacity: 1;
               }
             }
