@@ -1,9 +1,32 @@
 /* Animatin Mixins*/
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
 .container {
-  width: 1200px;
-  margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .heading-section {
@@ -1749,8 +1772,7 @@ header .show {
   }
 }
 .all-posts .wrapper-posts aside {
-  -ms-flex-preferred-size: calc(20% - 10px);
-      flex-basis: calc(20% - 10px);
+  width: calc(20% - 10px);
   margin-right: 10px;
 }
 @media screen and (max-width: 767.5px) {
@@ -1758,6 +1780,8 @@ header .show {
     -webkit-box-ordinal-group: 3;
         -ms-flex-order: 2;
             order: 2;
+    margin-right: 0;
+    width: 100%;
   }
 }
 .all-posts .wrapper-posts aside .box {
@@ -1846,8 +1870,7 @@ header .show {
   color: #fff;
 }
 .all-posts .wrapper-posts .posts {
-  -ms-flex-preferred-size: calc(80% - 10px);
-      flex-basis: calc(80% - 10px);
+  width: calc(80% - 10px);
   margin-left: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1855,6 +1878,7 @@ header .show {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100%;
 }
 @media screen and (max-width: 991.5px) {
   .all-posts .wrapper-posts .posts {
@@ -1862,17 +1886,28 @@ header .show {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    margin-left: 0;
   }
 }
 .all-posts .wrapper-posts .posts .col:first-child {
-  -ms-flex-preferred-size: calc(50% - 10px);
-      flex-basis: calc(50% - 10px);
+  width: calc(50% - 10px);
   margin-right: 10px;
 }
+@media screen and (max-width: 991.5px) {
+  .all-posts .wrapper-posts .posts .col:first-child {
+    width: 100%;
+    margin-right: 0;
+  }
+}
 .all-posts .wrapper-posts .posts .col:last-child {
-  -ms-flex-preferred-size: calc(50% - 10px);
-      flex-basis: calc(50% - 10px);
+  width: calc(50% - 10px);
   margin-left: 10px;
+}
+@media screen and (max-width: 991.5px) {
+  .all-posts .wrapper-posts .posts .col:last-child {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 .all-posts .wrapper-posts .posts .post {
   margin-bottom: 40px;
