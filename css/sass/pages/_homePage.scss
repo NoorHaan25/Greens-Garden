@@ -156,8 +156,9 @@
   .wrapper-trending {
     display: flex;
     gap: 20px;
+    // overflow: hidden;
     .col:first-child {
-      flex-basis: 30%;
+      width: 30%;
       .img-trending {
         position: relative;
         .text-trending {
@@ -177,59 +178,62 @@
       }
     }
     .col:last-child {
-      flex-basis: 70%;
+      width: 70%;
       .top-section {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         .heading-section-left {
           flex-basis: 50%;
         }
-        ul {
-          flex-basis: 50%;
+        .angles{
           display: flex;
-          align-items: center;
-          justify-content: end;
-          li {
-            margin: 0 20px;
-            color: #888888;
-            position: relative;
+          i{
+            background-color: $color-white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 10px;
+            border: 1px solid $color-border;
+            transition: all 0.3s linear;
             cursor: pointer;
-            &::after {
-              content: "";
-              position: absolute;
-              width: 0;
-              height: 2px;
+            &:hover{
               background-color: $main-color;
-              left: 0;
-              bottom: 0;
-              transition: width 0.3s linear;
-            }
-            &:hover::after {
-              width: 100%;
-            }
-            &:hover {
-              color: $main-color;
-            }
-          }
-          li.active {
-            color: $main-color;
-            &::after {
-              width: 100%;
+              color: $color-white;
             }
           }
         }
       }
-      .products-trending{
-        display: flex;
-        align-items: center;
-        padding-top: $padding-top;
-        padding-bottom: $padding-bottom;
-        // overflow: hidden;
-        .card{
-          margin: 0 5px;
-          flex-basis: calc((100% / 3) - 10px);
+      .wrapper-products-trending{
+        overflow: hidden;
+        .products-trending{
+          display: inline-flex;
+          align-items: center;
+          padding-top: $padding-top;
+          padding-bottom: $padding-bottom;
+          // width: 1689.86px;
+          overflow: hidden;
+          .card{
+            margin: 0 5px;
+            width: calc((819px / 3) - 10px);
+            position: relative;
+            .new{
+              position: absolute;
+              left: 0px;
+              top: 0px;
+              background-color: $color-white;
+              color: $color-black;
+              border: 1px solid $color-border;
+              padding: 2px;
+              font-size: 14px;
+            }
+          }
         }
       }
+      
     }
   }
 }
@@ -393,7 +397,7 @@
     display: flex;
     gap: 20px;
     .col:last-child {
-      flex-basis: 30%;
+      width: 30%;
       .img-special-Products {
         position: relative;
         .text-special-Products {
@@ -413,59 +417,52 @@
       }
     }
     .col:first-child {
-      flex-basis: 70%;
+      width: 70%;
       .top-section {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         .heading-section-left {
           flex-basis: 50%;
         }
-        ul {
-          flex-basis: 50%;
+        .angles{
           display: flex;
-          align-items: center;
-          justify-content: end;
-          li {
-            margin: 0 20px;
-            color: #888888;
-            position: relative;
+          i{
+            background-color: $color-white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 10px;
+            border: 1px solid $color-border;
+            transition: all 0.3s linear;
             cursor: pointer;
-            &::after {
-              content: "";
-              position: absolute;
-              width: 0;
-              height: 2px;
+            &:hover{
               background-color: $main-color;
-              left: 0;
-              bottom: 0;
-              transition: width 0.3s linear;
-            }
-            &:hover::after {
-              width: 100%;
-            }
-            &:hover {
-              color: $main-color;
-            }
-          }
-          li.active {
-            color: $main-color;
-            &::after {
-              width: 100%;
+              color: $color-white;
             }
           }
         }
       }
+      .wrapper-products-trending{
+        overflow: hidden;
       .products-trending{
-        display: flex;
-        align-items: center;
-        padding-top: $padding-top;
-        padding-bottom: $padding-bottom;
-        // overflow: hidden;
+        display: inline-flex;
+        justify-content: start;
+          align-items: center;
+          padding-top: $padding-top;
+          padding-bottom: $padding-bottom;
+          // width: 1689.86px;
+          // overflow: hidden;
         .card{
           margin: 0 5px;
-          flex-basis: calc((100% / 3) - 10px);
+            width: calc((819px / 3) - 10px);
+            position: relative;
         }
       }
+    }
     }
   }
 }

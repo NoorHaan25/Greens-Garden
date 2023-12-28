@@ -1,5 +1,7 @@
 import { dropdDownMenu } from "./dropdown.js";
 import { openedNavbar, closedNavbar } from "./navbar.js";
+import {getData} from "./api.js"
+import {generateStarRating} from "./generateStartRating.js"
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let cartFav = [];
 const products = document.getElementById("products");
@@ -12,18 +14,19 @@ let selectedCategory = "";
 let selectedColor = "";
 let selectedPrice = "";
 let productsFlowers = [];
-let getData = async function () {
-  const response = await fetch("http://localhost:3000/products");
-  const data = await response.json();
-  let listOfData = data;
+
+const getDataProducts = async()=>{
+  const response = await getData();
+  console.log('response', response);
+  let listOfData = response;
   productsFlowers = listOfData;
   display(listOfData);
   filterByCategory(listOfData);
   filterByColor(listOfData);
   filterByPrice(listOfData);
   pagination(listOfData);
- 
-};
+}
+
 function display(listOfData) {
   let templateContent = "";
   for (let i = 0; i < listOfData.length; i++) {
@@ -119,22 +122,6 @@ function display(listOfData) {
       localStorage.setItem("productFavorit", JSON.stringify(cartFav));
     });
   });
- 
-}
-function generateStarRating(product) {
-  // console.log('rrrr' , product);
-    // const wrapper = document.createElement("div");
-    const element = product.rating;
-    const numberOfStars = Math.round(element);
-    let productStars = document.createElement("div");
-    productStars.classList.add("rating")
-    //console.log('product stars' , productStars);
-    for (let i = 0; i < 5; i++) {
-        const createStarIcon = document.createElement("i");
-        createStarIcon.classList.add("fa" ,(i < numberOfStars) ? "fa-solid" : "fa-regular" , "fa-star");
-        productStars.appendChild(createStarIcon)
-      }
-  return productStars;
 }
 function getTotalCount() {
   let totalCount = 0;
@@ -357,8 +344,8 @@ function moreDetails(index) {
 
 
 total.textContent = getTotalPrice();
-getData();
+getDataProducts();
 getProducts();
-dropdDownMenu();
 openedNavbar();
 closedNavbar();
+dropdDownMenu();

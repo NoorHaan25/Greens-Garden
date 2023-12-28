@@ -12,7 +12,7 @@ export function dropdDownMenu() {
   select.addEventListener('click', function(){
     menu.forEach(function(el){
        el.classList.toggle('menu-open');
-      // console.log('tooo' , menu);
+      console.log('tooo' , menu);
     })
   });
 

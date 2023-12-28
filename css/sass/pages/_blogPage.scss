@@ -3,13 +3,18 @@
 .all-posts {
   padding-top: $padding-top;
   padding-bottom: $padding-bottom;
-
   .wrapper-posts {
     display: flex;
-
+    @include maxSmall{
+      flex-direction: column;
+    }
     aside {
       flex-basis: calc(20% - 10px);
       margin-right: 10px;
+      // order: 2;
+      @include maxSmall{
+        order: 2;
+      }
       .box {
         background-color: $color-white;
         border: 1px solid $color-border;
@@ -50,17 +55,15 @@
               display: flex;
               align-items: center;
               margin-bottom: 20px;
-
               .img {
                 margin: 10px;
+                width: 200px;
               }
-
               .text-post {
                 a {
                   color: #222222;
                   font-size: 14px;
                 }
-
                 span {
                   color: $color-light-gray;
                   font-size: 14px;
@@ -105,6 +108,9 @@
       margin-left: 10px;
       display: flex;
       align-items: center;
+      @include maxMedium{
+        flex-direction: column;
+      }
       .col:first-child{
         flex-basis: calc(50% - 10px);
         margin-right: 10px;
