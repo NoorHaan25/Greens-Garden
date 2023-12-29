@@ -3,7 +3,7 @@ header {
   padding-bottom: 20px;
   background-color: $color-white;
   .top-header{
-    padding-top: 20px;
+    // padding-top: 20px;
     padding-bottom: 20px;
     ul{
       display: flex;
@@ -12,6 +12,8 @@ header {
       li{
         margin: 0 10px;
         font-size: 14px;
+        display: flex;
+        align-items: center;
         i{
           color: $color-light-gray;
           margin: 0 3px;
@@ -28,8 +30,17 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    .logo{
+      .img{
+        @include maxSmall{
+          width: 150px;
+        }
+      }
+    }
     .wrraper-shopping-cart {
+      @include maxMedium{
+        display: none;
+      }
       .shopping-cart {
         display: flex;
         align-items: center;
@@ -148,16 +159,57 @@ header {
 
     .icons-header {
       display: flex;
-
+      align-items: center;
       .search,
-      .nav {
-        padding: 5px 20px;
+      .nav ,
+      .cart-icon{
+        // position: relative;
+        padding: 5px 15px;
         font-size: 20px;
         cursor: pointer;
-      }
+        @include maxExtraSmall{
+          padding: 5px 10px;
+        }
+        i{
+          @include maxExtraSmall{
+            font-size: 14px;
+          }
+        }  
 
-      .search {
+      }
+      .search ,
+      .cart-icon{
         border-right: 1px solid #e5e5e5;
+      }
+      .cart-icon{
+        position: relative;
+        padding: 5px 15px;
+        font-size: 20px;
+        cursor: pointer;
+        @include minLarge{
+          display: none;
+        }    
+        span{
+          position: absolute;
+          background-color: $main-color;
+          color: $color-white;
+          width: 20px;
+          height: 20px;
+          font-size: 14px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          right: 0;
+          bottom: 0;
+          @include maxExtraSmall{
+            width: 10px;
+            height: 10px;
+            font-size: 9px;
+            bottom: 8px;
+            right: 7px;
+          }
+        }
       }
     }
   }

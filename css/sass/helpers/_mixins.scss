@@ -1,10 +1,30 @@
+@mixin minLarge{
+  @media screen and (min-width:992px){
+    @content;
+  }
+}
 @mixin maxMedium{
   @media screen and (max-width:991.5px){
     @content;
   }
 }
+@mixin minMedium{
+  @media (min-width: 768px){
+    @content;
+  }
+}
 @mixin maxSmall{
   @media screen and (max-width:767.5px){
+    @content;
+  }
+}
+@mixin screenMedium{
+  @media screen and (min-width:767.5px) and (max-width:991.5px){
+    @content;
+  }
+}
+@mixin maxExtraSmall{
+  @media screen and (max-width:575.5px){
     @content;
   }
 }
