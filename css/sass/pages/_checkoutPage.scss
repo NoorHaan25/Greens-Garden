@@ -1,17 +1,21 @@
 .check-out {
-  padding-top: $padding-top;
+  padding-top: padding-top;
   padding-bottom: $padding-bottom;
 
   .wrapper-checkout {
     display: flex;
-
+    flex-wrap: wrap;
     .col:first-child {
       flex-basis: calc(70% - 10px);
       margin-left: 10px;
       border: 1px solid $color-border;
       background-color: $color-white;
+      padding: $padding-top 10px;
+      @include maxMedium{
+        flex-basis: 100%;
+        margin-left: 0;
+      }
 
-      .personal-information {
         .heading-info {
           border-bottom: 1px solid $color-border;
           padding: 10px;
@@ -22,10 +26,9 @@
 
           }
         }
-
         .nav {
           display: flex;
-          padding: $padding-top 10px;
+          padding: $padding-top 5px;
 
           li {
             margin: 0 5px;
@@ -33,19 +36,18 @@
             font-size: 14px;
           }
         }
-
-        form {
-          padding: $padding-top 10px;
-        }
-
         .block-input {
           display: flex;
           align-items: center;
           margin-bottom: 20px;
-
+          // &:not(:first-child){
+            @include maxExtraSmall{
+              flex-direction: column;
+              align-items: start;
+            }
+          // }
           .col {
             border: none;
-
             &:first-child {
               flex-basis: 30%;
               font-weight: 500;
@@ -62,7 +64,9 @@
 
             .wrapper-input {
               width: 50%;
-
+              @include maxExtraSmall{
+                width: 100%;
+              }
               .input-option {
                 position: relative;
                 width: 100%;
@@ -94,8 +98,8 @@
             }
           }
         }
-
         .account {
+          margin-bottom: 20px;
           span:first-child {
             font-weight: 700;
           }
@@ -108,7 +112,6 @@
             font-size: 14px;
           }
         }
-
         .options {
           .wrapper-option {
             margin: 15px 0;
@@ -127,52 +130,13 @@
             display: inline-block;
             width: 50%;
             font-size: 14px;
+            margin-top: 10px;
+            @include maxExtraSmall{
+              width: 100%;
+
+            }
           }
         }
-
-        // input[type='radio'] {
-        //   display: none;
-
-        //   &+label {
-        //     position: relative;
-        //     padding-left: 25px;
-        //     margin-left: 10px;
-            
-        //     &::after {
-        //       content: '';
-        //       position: absolute;
-        //       width: 20px;
-        //       height: 20px;
-        //       left: 0;
-        //       top: 50%;
-        //       transform: translateY(-50%);
-        //       background-color: $color-white;
-        //       border: 1px solid $color-border;
-        //       border-radius: 50%;
-        //     }
-        //   }
-        //   &+label.invalid{
-        //     &::after {
-        //       content: '';
-            
-        //       border: 1px solid red;
-              
-        //     }
-        //   }
-        //   &:checked+label::before {
-        //     content: '';
-        //     position: absolute;
-        //     background-color: $main-color;
-        //     width: 10px;
-        //     height: 10px;
-        //     left: 5px;
-        //     top: 50%;
-        //     transform: translateY(-50%);
-        //     border-radius: 50%;
-        //     z-index: 55;
-        //   }
-        // }
-
         .wrapper-valid-input {
           position: relative;
 
@@ -184,7 +148,6 @@
             display: none;
           }
         }
-
         .onsubmit {
           display: flex;
           justify-content: end;
@@ -203,7 +166,7 @@
             cursor: pointer;
           }
         }
-      }
+      
     }
 
   }

@@ -1,10 +1,9 @@
 .cart {
   padding-top: $padding-top;
   padding-bottom: $padding-bottom;
-
   .wrapper-cart {
     display: flex;
-
+    flex-wrap: wrap;
     .col:first-child {
       flex-basis: calc(70% - 10px);
       margin-right: 10px;
@@ -12,6 +11,10 @@
       border-radius: 10px;
       border: 1px solid $color-border;
       height: fit-content;
+      @include maxMedium{
+        flex-basis: 100%;
+      margin-right: 0;
+      }
       .shopping-cart {
         .heading-cart {
           border-bottom: 1px solid $color-border;
@@ -25,16 +28,24 @@
           //margin-top: 20px;
           padding-top: $padding-top;
           padding-bottom: $padding-bottom;
-
           li {
             display: flex;
             margin-bottom: 10px;
+            @include maxMedium{
+             flex-direction: column;
+             margin-bottom: 25px;
+             border-bottom: 1px solid $color-border;
+            }
             .column {
               display: flex;
               align-items: center;
               justify-content: center;
               flex-basis: calc(100% - 10px);
               margin: 0 5px;
+              @include maxMedium{
+               
+                margin:7px 5px;
+               }
               &:nth-child(2) {
                 flex-direction: column;
               }
@@ -94,6 +105,4 @@
       }
     }
   }
-
- 
 }
