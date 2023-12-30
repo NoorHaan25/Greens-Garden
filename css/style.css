@@ -878,6 +878,14 @@ header .top-header ul li {
       -ms-flex-align: center;
           align-items: center;
 }
+header .top-header ul li a {
+  color: #000;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+header .top-header ul li a:hover {
+  color: #6bb42f;
+}
 header .top-header ul li i {
   color: #777777;
   margin: 0 3px;
