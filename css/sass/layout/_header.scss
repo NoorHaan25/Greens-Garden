@@ -248,7 +248,6 @@ header {
           cursor: pointer;
         }
       }
-
       ul {
           padding: 20px;
         li {
@@ -274,6 +273,15 @@ header {
             }
           }
         }
+      }
+    }
+    .nav-bar-show{
+      width: 30%;
+      @include maxMedium{
+        width: 50%;
+      }
+      @include maxSmall{
+        width: 100%;
       }
     }
   }

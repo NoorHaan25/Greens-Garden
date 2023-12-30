@@ -15,32 +15,64 @@
 </head>
 <body>
   <!-- start header -->
-  <!-- <header>
+  <header>
     <div class="container">
+      <div class="top-header">
+        <ul>
+          <li>
+            <i class="fa-solid fa-phone"></i>
+            <span>Call Us: +91 123456789</span>
+          </li>
+          <li>
+
+            <div class="dropdown " >
+              <div class="select">
+                <i class="fa-regular fa-user"></i>
+                <span>Account</span>
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+              <ul class="menu" id="not-existing-account">
+                <li>Register</li>
+                <li>Sign in</li>
+              </ul>
+              <ul class="menu"  id="existing-account">
+                <li>Information</li>
+                <li>My Account</li>
+                <li><a href="./wishlist.html">My wishlists</a></li>
+                <li>Sign Out</li>
+              </ul>
+            </div>
+           
+          </li>
+          
+        </ul>
+      </div> 
       <div class="wrapper-header">
         <div class="wrraper-shopping-cart">
-          <div class="shopping-cart">
-            <div class="img-icon">
-              <img src="./img/shopping-bag.png" alt="shopping-bag" />
-            </div>
-            <div class="text-shop" id="dropdown">
-              <div class="title">
-                <span>Shopping Cart</span>
+          <div class="shopping-cart dropdown">
+            <div class="select">
+              <div class="img-icon">
+                <img src="./img/shopping-bag.png" alt="shopping-bag" />
               </div>
-              <div class="total-price">
-                <span>0</span>
-                <span>-</span>
-                <span id="number-product">0<span></span>item</span>
+              <div class="text-shop ">
+                <div class="title">
+                  <span>Shopping Cart</span>
+                </div>
+                <div class="total-price">
+                  <span>$34.27 </span>
+                  <span>-</span>
+                  <span id="number-product">0<span></span>item</span>
+                </div>
+                
               </div>
-
             </div>
-            <div class="dropdown-menu" id="dropdown-menu">
+            <div class="dropdown-menu menu" >
               <p id="empty-products">There are no items in your cart.</p>
               <div class="items" id="exist-products">
                 <ul id="cart-products"></ul>
                 <div class="total">
                   <span>total</span>
-                  <span id="total">0</span>
+                  <span id="total">325$</span>
                 </div>
                 <div class="buttons">
                   <button><a href="#">check out</a></button>
@@ -56,6 +88,10 @@
           </div>
         </div>
         <div class="icons-header">
+          <div class="cart-icon">
+            <i class="fa fa-shopping-bag"></i>
+            <span class="number-cart">0</span>
+          </div>
           <div class="search">
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
@@ -71,14 +107,13 @@
           </div>
           <ul>
             <li><a href="./index.html">Home</a></li>
-           <li><a href="#">Category</a></li> 
             <li><a href="./flowers-products.html">Shop</a></li>
             <li><a href="./blog.html">Blog</a></li>
           </ul>
         </div>
       </div>
     </div>
-  </header> -->
+  </header>
   <!-- end header -->
   <!-- <section class="nav-links-page">
     <div class="container">
@@ -296,7 +331,7 @@
   </section>
   <!-- end section posts -->
   <!-- start section footer -->
-  <!-- <footer>
+   <footer>
     <div class="container">
       <div class="wrapper-footer">
         <div class="col">
@@ -347,7 +382,7 @@
         </div>
       </div>
     </div>
-  </footer> -->
+  </footer> 
   <!-- end section footer -->
   <script type="module" src="./javascript/blog.js"></script>
 </body>

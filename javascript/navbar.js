@@ -9,8 +9,8 @@ export function openedNavbar(){
   
     navbar.classList.add("show");
     // console.log('navbar links clicked' , navbarLinks);
-    navbarLinks.style.cssText= "width:30%;"
-    
+    // navbarLinks.style.cssText= "width:50%;"
+    navbarLinks.classList.add("nav-bar-show");
   })
 }
 export function closedNavbar(){
