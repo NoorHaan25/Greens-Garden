@@ -5,170 +5,24 @@
   .wrapper-checkout {
     display: flex;
     flex-wrap: wrap;
-    .col:first-child {
-      flex-basis: calc(70% - 10px);
+    & > .col:first-child {
+      width: calc(70% - 10px);
       margin-left: 10px;
       border: 1px solid $color-border;
       background-color: $color-white;
       padding: $padding-top 10px;
       @include maxMedium{
-        flex-basis: 100%;
+        width: 100%;
         margin-left: 0;
       }
-
-        .heading-info {
-          border-bottom: 1px solid $color-border;
-          padding: 10px;
-
-          h1 {
-            font-size: 16px;
-            letter-spacing: 0.5px;
-
-          }
-        }
-        .nav {
-          display: flex;
-          padding: $padding-top 5px;
-
-          li {
-            margin: 0 5px;
-            font-weight: 400;
-            font-size: 14px;
-          }
-        }
+      .personal-information {
         .block-input {
-          display: flex;
-          align-items: center;
-          margin-bottom: 20px;
-          // &:not(:first-child){
-            @include maxExtraSmall{
-              flex-direction: column;
-              align-items: start;
-            }
-          // }
           .col {
             border: none;
-            &:first-child {
-              flex-basis: 30%;
-              font-weight: 500;
-            }
-
-            &:last-child {
-              flex-basis: 70%;
-            }
-
-            .check-box {
-              display: flex;
-              align-items: center;
-            }
-
-            .wrapper-input {
-              width: 50%;
-              @include maxExtraSmall{
-                width: 100%;
-              }
-              .input-option {
-                position: relative;
-                width: 100%;
-              }
-
-              input {
-                width: 100%;
-                padding: 8px 5px;
-                border: 1px solid $color-border;
-                border-radius: 5px;
-              }
-
-              p {
-                color: $gray-color;
-                font-size: 14px;
-                margin-top: 10px;
-              }
-
-              button {
-                position: absolute;
-                top: 50%;
-                right: 0;
-                transform: translateY(-50%);
-                background-color: $color-black;
-                color: $color-white;
-                border-radius: 0 5px 5px 0;
-
-              }
-            }
           }
         }
-        .account {
-          margin-bottom: 20px;
-          span:first-child {
-            font-weight: 700;
-          }
-
-          span:nth-child(2) {
-            font-style: italic;
-          }
-
-          span:last-child {
-            font-size: 14px;
-          }
-        }
-        .options {
-          .wrapper-option {
-            margin: 15px 0;
-          }
-
-          label {
-            font-weight: 500;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-          }
-
-          em {
-            line-height: 1.7;
-            display: inline-block;
-            width: 50%;
-            font-size: 14px;
-            margin-top: 10px;
-            @include maxExtraSmall{
-              width: 100%;
-
-            }
-          }
-        }
-        .wrapper-valid-input {
-          position: relative;
-
-          &>.valid-icon {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 10px;
-            display: none;
-          }
-        }
-        .onsubmit {
-          display: flex;
-          justify-content: end;
-          padding: 0 20px 20px 0;
-
-          input {
-            border: none;
-            outline: none;
-            background-color: $main-color;
-            color: $color-white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 400;
-            text-transform: uppercase;
-            cursor: pointer;
-          }
-        }
-      
+      }
     }
-
   }
 
   .message-order-recieve {
