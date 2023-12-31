@@ -1,7 +1,11 @@
 
 aside {
-  flex-basis: calc(20% - 10px);
-  margin-right: 10px;
+  // width: calc(20% - 10px);
+  // margin-right: 10px;
+  // @include maxSmall{
+  //   width: 100%;
+  //   margin-right: 0;
+  // }
   .box {
     background-color: $color-white;
     border: 1px solid $color-border;
@@ -19,7 +23,20 @@ aside {
     }
     .body-box {
       padding: 30px 20px;
-
+      display: flex;
+      justify-content: center;
+      @include maxExtraSmall{
+        flex-direction: column;
+      }
+      .dropdown{
+        margin: 5px;
+      }
+      i{
+        margin-right: 5px;
+      }
+      .caret-rotate{
+        transform: rotate(180deg);
+      }
       a {
         color: $color-light-gray;
         transition: all 0.3s linear;
@@ -31,9 +48,10 @@ aside {
 
       .select {
         border: 1px solid #e5e5e5;
-        display: inline-block;
+        display: flex;
+        align-items: baseline;
         width: 100%;
-        padding: 10px;
+        padding: 6px 17px;;
         color: $color-light-gray;
       }
 

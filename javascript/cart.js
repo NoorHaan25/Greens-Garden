@@ -1,3 +1,8 @@
+import { dropdDownMenu } from "./dropdown.js";
+import { openedNavbar, closedNavbar } from "./navbar.js";
+dropdDownMenu();
+openedNavbar();
+closedNavbar();
 let products = JSON.parse(localStorage.getItem("cart")) || [];
 let cart = document.getElementById("cart");
 console.log('cart cart', cart);

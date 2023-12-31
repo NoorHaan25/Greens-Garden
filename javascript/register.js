@@ -1,3 +1,8 @@
+import { dropdDownMenu } from "./dropdown.js";
+import { openedNavbar, closedNavbar } from "./navbar.js";
+dropdDownMenu();
+openedNavbar();
+closedNavbar();
 const button = document.getElementById('button-password');
 const password = document.getElementById('password-register');
 const firstNameInput = document.getElementById('first-name');
@@ -120,7 +125,7 @@ if(isFirstNameValid && isLastNameValid && isEmailValid && selectedGender && sele
         setTimeout(function(){
           haveAccount.style.cssText="display:none;";
         },1000)
-      }else (element.email != emailInput.value){
+      }else (element.email != emailInput.value)
         let user = {
           firstName: firstNameInput.value,
           lastNameInput: lastNameInput.value,
@@ -145,5 +150,4 @@ if(isFirstNameValid && isLastNameValid && isEmailValid && selectedGender && sele
   setTimeout(() => {
     window.location = "login.html"
   }, 2000);
-}
 }

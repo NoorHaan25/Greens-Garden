@@ -1,3 +1,8 @@
+import { dropdDownMenu } from "./dropdown.js";
+import { openedNavbar, closedNavbar } from "./navbar.js";
+dropdDownMenu();
+openedNavbar();
+closedNavbar();
 const passwordLogin = document.getElementById('password-login');
 const emailLogin = document.getElementById('email-login');
 const loginButton = document.getElementById('login-button');

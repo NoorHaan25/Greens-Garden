@@ -26,6 +26,11 @@
     display: none;
     transition: width 0.2s linear;
     z-index: -1;
+    @include maxExtraSmall{
+      left:0;
+      width: 100%;
+      transform: unset;
+    }
   }
   .menu li{
     padding: 0.7em 0.5em;

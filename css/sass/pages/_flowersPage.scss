@@ -1,82 +1,23 @@
 .flowers {
   .wrapper-flowers {
-    display: flex;
-    align-items: flex-start;
-
-    aside {
-      flex-basis: calc(20% - 10px);
-      margin-right: 10px;
-
-      .box {
-        background-color: $color-white;
-        border: 1px solid $color-border;
-        margin-bottom: 15px;
-
-        .head-box {
-          border-bottom: 1px solid $color-border;
-
-          h3 {
-            padding: 15px 20px;
-
-            a {
-              color: #222222;
-            }
-          }
-        }
-
-        .body-box {
-          .heading-list {
-            margin-bottom: 15px;
-          }
-
-          ul {
-            li {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            }
-          }
-
-          .filter-products {
-            // input[type=radio] {
-            //   display: none;
-            // }
-            // label {
-            //   font-size: 15px;
-            //   padding-left: 20px;
-            //   position: relative;
-            //   color: $color-light-gray;
-            //   &::before {
-            //   content: '';
-            //   position: absolute;
-            //   background-color: $color-white;
-            //   border: 1px solid #888888;
-            //   height: 10px;
-            //   width: 10px;
-            //   border-radius: 50%;
-            //   left: 0;
-            //   top: 50%;
-            //   transform: translateY(-50%);
-
-            // }
-            // }
-
-
-          }
-        }
-      }
-    }
-
     .products {
-      width: 80%;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      @include maxSmall{
+        width: 100%;
+      }
     }
-
     .card {
-      flex-basis: calc((100% / 3) - 10px);
+      width: calc((100% / 3) - 10px);
       margin: 5px;
+      @include maxMedium{
+        width: calc((100% / 2) - 10px);
+      }
+      @include maxSmall{
+        width: 100%;
+        margin:5px 0;
+      }
     }
     .pagination{
       li{
