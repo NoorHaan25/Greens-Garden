@@ -2,6 +2,8 @@ import { openedNavbar, closedNavbar } from "./navbar.js";
 import { dropdDownMenu } from "./dropdown.js";
 import { getData } from "./api.js";
 import { generateStarRating } from "./generateStartRating.js";
+import {search} from "./search.js";
+// search()
 const angleLeft = document.querySelectorAll(".fa-angle-left");
 const angleRight = document.querySelectorAll(".fa-angle-right");
 // console.log('angleLeft', angleLeft , 'angleRight', angleRight);
@@ -22,7 +24,7 @@ angleRight.forEach((el)=>{
     });
   })
 })
-const total = document.getElementById("total");
+const total = document.querySelectorAll(".total-products-price");
 const countProduct = document.getElementById("number-product");
 const existProducts = document.getElementById("exist-products");
 const emptyProducts = document.getElementById("empty-products");
@@ -91,6 +93,7 @@ const getDataProducts = async () => {
     let listOfData = response;
     productsFlowers = listOfData;
     display(listOfData);
+    search(listOfData);
 };
 function display(products) {
     // console.log("products", products);
@@ -272,8 +275,10 @@ function getTotalCount() {
       console.log("not existing product", cart);
     }
     countProduct.textContent = getTotalCount();
-    total.textContent = getTotalPrice();
     localStorage.setItem("cart", JSON.stringify(cart));
+    total.forEach((total)=>{
+      total.textContent = getTotalPrice() +'  '+'EGP';
+    })
     getProducts();
   }
   function update(index, count) {
@@ -282,8 +287,10 @@ function getTotalCount() {
     if (foundProduct) {
       foundProduct.count = count;
       countProduct.textContent = getTotalCount();
-      total.textContent = getTotalPrice();
       localStorage.setItem("cart", JSON.stringify(cart));
+      total.forEach((total)=>{
+        total.textContent = getTotalPrice() +'  '+'EGP';
+      })
       getProducts();
     }
   }
@@ -308,7 +315,7 @@ function getTotalCount() {
               <span class="count">${element.count} x</span>
               <span class="price">${element.price}</span>
             </div>
-            <div class="delete">
+            <div class="delete" data-id="${element.id}">
               <span>x</span>
             </div>
           </div>
@@ -316,6 +323,16 @@ function getTotalCount() {
         `;
       }
       cartProducts.innerHTML = products;
+      const deleteProduct = document.querySelectorAll('.delete');
+      console.log('delete product' , deleteProduct);
+      deleteProduct.forEach((el)=>{
+        el.addEventListener('click',function(){
+          // console.log('el' , el);
+          let id = el.dataset.id ;
+          console.log('id' , id);
+          removeProduct(id);
+        });
+      });
     }
   }
 /*                                             end section countdown                                                */
@@ -334,7 +351,25 @@ function createUsername() {
         notExistingAccount.style.cssText = "display:block;";
     }
   }
-total.textContent = getTotalPrice();
+function removeProduct(id){
+  // console.log('id' ,'fu' , id);
+  const index = cart.findIndex((product) => product.id == id);
+  console.log('index', index);
+  if (index !== -1) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      countProduct.textContent = getTotalCount();
+      total.forEach((total)=>{
+      total.textContent = getTotalPrice() +'  '+'EGP';
+      getProducts();
+})
+  
+  }  
+}
+  countProduct.textContent = getTotalCount();
+  total.forEach((total)=>{
+    total.textContent = getTotalPrice() +'  '+'EGP';
+  })
 getProducts();
 createUsername();
 sliderImages();
@@ -342,5 +377,4 @@ countdown();
 openedNavbar();
 closedNavbar();
 dropdDownMenu();
-
 getDataProducts();

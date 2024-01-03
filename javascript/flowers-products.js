@@ -1,7 +1,8 @@
 import { dropdDownMenu } from "./dropdown.js";
 import { openedNavbar, closedNavbar } from "./navbar.js";
-import {getData} from "./api.js"
+import {getData} from "./api.js";
 import {generateStarRating} from "./generateStartRating.js"
+import {search} from "./search.js";
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let cartFav = [];
 const products = document.getElementById("products");
@@ -9,7 +10,8 @@ const countProduct = document.getElementById("number-product");
 const existProducts = document.getElementById("exist-products");
 const emptyProducts = document.getElementById("empty-products");
 const cartProducts = document.getElementById("cart-products");
-const total = document.getElementById("total");
+const total = document.querySelectorAll(".total-products-price");
+console.log('Total' , countProduct);
 let selectedCategory = "";
 let selectedColor = "";
 let selectedPrice = "";
@@ -25,6 +27,7 @@ const getDataProducts = async()=>{
   filterByColor(listOfData);
   filterByPrice(listOfData);
   pagination(listOfData);
+  search(listOfData);
 }
 
 function display(listOfData) {
@@ -36,7 +39,7 @@ function display(listOfData) {
   <div class="card">
   <div class="icons-card">
     <i class="fa-regular fa-heart"></i>
-    <i class="fa-regular fa-eye"></i>
+    <i class="fa-regular fa-eye" data-id="${listOfData[i].id}" data-index="${i}"></i>
     <i class="fa-solid fa-shuffle"></i>
   </div>
   <div class="img-card">
@@ -55,11 +58,11 @@ function display(listOfData) {
       <div class="quantity">
         <span class="text-count">1</span>
         <div class="counter">
-          <span class="button-plus" data-index="${i}"><i class="fa-solid fa-sort-up"></i></span>
-          <span class="button-minus" data-index="${i}"><i class="fa-solid fa-sort-down"></i></span>
+          <span class="button-plus" data-id="${listOfData[i].id}"><i class="fa-solid fa-sort-up"></i></span>
+          <span class="button-minus" data-id="${listOfData[i].id}"><i class="fa-solid fa-sort-down"></i></span>
         </div>
       </div>
-      <div class="button-add" data-index="${i}">
+      <div class="button-add" data-id="${listOfData[i].id}" data-index="${i}">
         <img src="./img/shopping-bag.png" alt="shopping-bag">
         <span>Add To Cart</span>
       </div>
@@ -77,34 +80,37 @@ function display(listOfData) {
   let buttonHeart = document.querySelectorAll(".fa-heart");
   buttonAdd.forEach((el) => {
     el.addEventListener("click", function () {
-      let index = el.dataset.index;
-      addCart(index, this);
+      // let index = el.dataset.index;
+      let id = el.dataset.id;
+      addCart(this , id);
     });
   });
   buttonPlus.forEach((el) => {
     el.addEventListener("click", function () {
       let countElement = el.parentElement.previousElementSibling;
       +countElement.innerHTML++;
-      let index = el.dataset.index;
-      console.log(index);
-      update(index, countElement.textContent);
+      let id = el.dataset.id;
+      console.log(id);
+      update(id, countElement.textContent);
     });
   });
   buttonMinus.forEach((el) => {
     el.addEventListener("click", function () {
-      let index = el.dataset.index;
+      let id = el.dataset.id;
       let countElement = el.parentElement.previousElementSibling;
       let countValue = parseInt(countElement.textContent);
       if (countValue > 1) {
         countElement.textContent = countValue - 1;
-        update(index, countElement.textContent);
+        update(id, countElement.textContent);
       }
     });
   });
-  buttonEye.forEach((el, index) => {
-    // console.log('eye' , index);
-    el.addEventListener("click", function () {
-      moreDetails(index);
+  buttonEye.forEach((el) => {
+    let id = el.dataset.id;
+    let index = el.dataset.index;
+    el.addEventListener("click", function() {
+      moreDetails(id , index);
+      console.log('id: ' , id , index);
     });
   });
   buttonHeart.forEach((el, index) => {
@@ -141,42 +147,45 @@ function getTotalPrice() {
   // console.log('sum = ' + totalSub);
   return totalSub;
 }
-function addCart(index, term) {
-  let choosenProduct = productsFlowers[index];
+function addCart( term  , id) {
+  let choosenProduct = productsFlowers.find(product => product.id == id);
+  // console.log('adddddd' , id);
   let parentElement = term.parentElement;
   let counts = parentElement.children[0].children[0].textContent;
-  let findProduct = cart.find(function (product) {
-    return product.id === choosenProduct.id;
-  });
-  if (findProduct) {
+  let existProduct = cart.find((product)=>product.id == id);
+  // console.log('findProduct', existProduct);
+  if (existProduct) {
     console.log("isexisting product");
-  } else {
+  } else{
     cart.push({ ...choosenProduct, count: counts, total: 0 });
     console.log("not existing product", cart);
   }
   countProduct.textContent = getTotalCount();
-  total.textContent = getTotalPrice();
+  total.forEach((total)=>{
+    total.textContent = getTotalPrice() +'  '+'EGP';
+  })
   localStorage.setItem("cart", JSON.stringify(cart));
   getProducts();
 }
-function update(index, count) {
-  const chosenProduct = productsFlowers[index];
-  const foundProduct = cart.find((product) => product.id === chosenProduct.id);
-  if (foundProduct) {
-    foundProduct.count = count;
+function update(id, count) {
+  let existProduct = cart.find((product)=>product.id == id);
+  if (existProduct) {
+    existProduct.count = count;
     countProduct.textContent = getTotalCount();
-    total.textContent = getTotalPrice();
+    total.forEach((total)=>{
+      total.textContent = getTotalPrice() +'  '+'EGP';
+    })
     localStorage.setItem("cart", JSON.stringify(cart));
     getProducts();
   }
 }
 function getProducts() {
   if (cart.length == 0) {
-    console.log("no products found");
+    // console.log("no products found");
   } else {
     emptyProducts.style.cssText = "display:none;";
     existProducts.style.cssText = "display:block;";
-    console.log(" products found");
+    // console.log(" products found");
     let products = "";
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
@@ -199,6 +208,17 @@ function getProducts() {
       `;
     }
     cartProducts.innerHTML = products;
+    // const deleteProduct = document.querySelectorAll('.delete-products');
+    // console.log('delete product' , deleteProduct);
+    
+    // deleteProduct.forEach((el)=>{
+    //   el.addEventListener('click',function(){
+    //     // console.log('el' , el);
+    //     let id = el.dataset.id ;
+    //     console.log('id' , id);
+    //     // removeProduct(id);
+    //   });
+    // });
   }
 }
 function applyFilters(products) {
@@ -293,8 +313,7 @@ function pagination(allProducts) {
     });
   }
 }
-function moreDetails(index) {
-  console.log("index", index);
+function moreDetails(id) {
   let imgDetails = document.querySelector(".img-details");
   let details = document.querySelector(".details");
   let nameProduct = document.querySelector(".name-product");
@@ -304,24 +323,29 @@ function moreDetails(index) {
   let buttonAdd = document.querySelector(".add");
   let buttonPlusDetails = document.querySelector(".plus");
   let buttonMinusDetails = document.querySelector(".minus");
-  let choosenProduct = productsFlowers[index];
+  let choosenProduct = productsFlowers;
+  console.log('choosen product' , choosenProduct);
+  const foundProduct = choosenProduct.find(product => product.id == id);
   buttonPlusDetails.addEventListener("click", function () {
     +countNumber++;
     count.innerHTML = countNumber;
+    update(id, countNumber);
   });
   buttonMinusDetails.addEventListener("click", function () {
     if (countNumber > 1) {
       +countNumber--;
       count.textContent = countNumber;
+      update(id, countNumber);
     }
   });
+  
   buttonAdd.addEventListener("click", function () {
-    let findProduct = cart.find(function (product) {
-      return product.id === choosenProduct.id;
-    });
-    if (findProduct) {
+    let choosenProduct = productsFlowers.find(product => product.id == id);
+    let existProduct = cart.find((product)=>product.id == id);
+    console.log('exist product cc' , existProduct);
+    if (existProduct) {
       console.log("isexisting product");
-    } else {
+    } else{
       cart.push({ ...choosenProduct, count: countNumber, total: 0 });
       console.log("not existing product", cart);
     }
@@ -332,18 +356,20 @@ function moreDetails(index) {
   });
 
   let closeCardPro = document.querySelector(".close-card-product");
-  imgDetails.src = productsFlowers[index].img;
-  imgDetails.alt = productsFlowers[index].title;
-  nameProduct.textContent = productsFlowers[index].title;
-  price.textContent = productsFlowers[index].price;
+  imgDetails.src = foundProduct.img;
+  imgDetails.alt = foundProduct.title;
+  nameProduct.textContent = foundProduct.title;
+  price.textContent = foundProduct.price;
   details.style.cssText = "display:flex;";
   closeCardPro.addEventListener("click", function () {
     details.style.cssText = "display:none;";
   });
 }
+countProduct.textContent = getTotalCount();
 
-
-total.textContent = getTotalPrice();
+total.forEach((total)=>{
+  total.textContent = getTotalPrice() +'  '+'EGP';
+})
 getDataProducts();
 getProducts();
 openedNavbar();

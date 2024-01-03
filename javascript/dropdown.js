@@ -11,7 +11,7 @@ export function dropdDownMenu() {
   select.addEventListener('click', function(){
     menu.forEach(function(el){
        el.classList.toggle('menu-open');
-       caret.classList.toggle('caret-rotate');
+      //  caret.classList.toggle('caret-rotate');
       console.log('tooo' , menu);
     })
   });

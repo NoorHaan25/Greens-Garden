@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +13,7 @@
   <link rel="icon" href="./img/favicon.ico">
   <title>Greens Garden</title>
 </head>
+
 <body>
   <!-- start header -->
   <header>
@@ -43,7 +43,9 @@
                 <li>Sign Out</li>
               </ul>
             </div>
+
           </li>
+
         </ul>
       </div>
       <div class="wrapper-header">
@@ -74,7 +76,7 @@
                   <span class="total-products-price">0</span>
                 </div>
                 <div class="buttons">
-                  <button><a href="./check-out.html">check out</a></button>
+                  <button><a href="#">check out</a></button>
                   <button><a href="./cart.html">View Cart</a></button>
                 </div>
               </div>
@@ -127,85 +129,71 @@
     </div>
   </header>
   <!-- end header -->
-   <section class="nav-links-page">
+  <div class="product-details">
     <div class="container">
-      <div class="links-page">
-        <ul>
-          <li><a href="./index.html">Home</a></li>
-          <span>/</span>
-          <li><a href="./cart.html" class="active">Cart</a></li>
-        </ul>
-      </div>
-    </div>
-  </section> 
-  <!-- start section flowers -->
-  <section class="cart">
-    <div class="container">
-      <div class="wrapper-cart">
-        <div class="col">
-          <div class="shopping-cart">
-            <div class="heading-cart">
-              <h1>Shopping Cart</h1>
-            </div>
-            <ul id="cart">
-              
-            </ul>
+      <div class="content-details">
+        <div class="card-details">
+          <div class="img-product">
+            <img src="./img/products/Wedding/baby-blue-1.jpg" alt="" class="img-details">
           </div>
-        </div>
-        <div class="col wrapper-info-cart">
-          <div class="informaion-cart">
-            <div class="card-block">
-              <div class="row">
-                <div class="numbers-items">
-                  <span id="numbers-items">5</span>
-                  <span>items</span>
+          <div class="text-card">
+            <h3 class="name-product"></h3>
+            <div class="price">
+              <span class="price-product"></span>
+              <span>EGP</span>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit non tempora magni repudiandae sint suscipit tempore
+              quis maxime explicabo veniam eos reprehenderit fuga
+            </p>
+            <div class="quantity-block">
+              <h4>Quantity</h4>
+              <div class="content">
+                <div class="quantity">
+                  <div class="wrapper-button-puls">
+                    <span class="plus">
+                      <i class="fa-solid fa-plus"></i>
+                    </span>
+                  </div>
+                  <div class="count-content">1</div>
+                  <div class="wrapper-button-minus">
+                    <span class="minus">
+                      <i class="fa-solid fa-minus"></i>
+                    </span>
+                  </div>
                 </div>
-                <div class="total-price">
-                  <span id="total-price"></span>
-                </div>
+                <button class='add' >ADD TO CART</button>
               </div>
-              <div class="row">
-                <span>Total (tax incl.)</span>
-                <span id="total-tax">$87.00</span>
-              </div>
-              <div class="row">
-                <button><a href="#">Proceed to checkout</a></button>
-              </div>
+              
             </div>
             <ul>
               <li>
-                <div class="icon-img">
-                  <img src="./img/icons/lock.png" alt="lock">
-                </div>
-                <div class="text-block">
-                  <span>Security policy</span>
-                  <p>(edit with the Customer Reassurance module)</p>
-                </div>
+                <a href="#">
+                  <i class="fa-solid fa-heart"></i>
+                  <span>Add To Wishlist</span>
+                </a>
               </li>
               <li>
-                <div class="icon-img">
-                  <img src="./img/icons/shipped.png" alt="shipped">
-                </div>
-                <div class="text-block">
-                  <span>Delivery policy</span>
-                  <p>(edit with the Customer Reassurance module)</p>
-                </div>
-              </li>
-              <li>
-                <div class="icon-img">
-                  <img src="./img/icons/package.png" alt="package">
-                </div>
-                <div class="text-block">
-                  <span>Return policy</span>
-                  <p>(edit with the Customer Reassurance module)</p>
-                </div>
+                <a href="#">
+                  <i class="fa-solid fa-shuffle"></i>
+                  <span>Add To Compare</span>
+                </a>
               </li>
             </ul>
-          </div>
+          </div> 
+        </div>
+        <div class="share">
+          <span>share:</span>
+          <ul>
+            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+  <!-- start section footer -->
   <footer>
     <div class="container">
       <div class="wrapper-footer">
@@ -258,8 +246,7 @@
       </div>
     </div>
   </footer>
-    <!-- end section footer -->
-
-    <script src="./javascript/cart.js" type="module"></script>
+  <!-- end section footer -->
+  <script type="module" src="./javascript/moreDetails.js"></script>
 </body>
 </html>

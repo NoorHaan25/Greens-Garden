@@ -25,7 +25,7 @@
           </li>
           <li>
 
-            <div class="dropdown " >
+            <div class="dropdown ">
               <div class="select">
                 <i class="fa-regular fa-user"></i>
                 <span>Account</span>
@@ -35,7 +35,7 @@
                 <li><a href="./register.html">Register</a></li>
                 <li><a href="./login.html">Sign in</a></li>
               </ul>
-              <ul class="menu"  id="existing-account">
+              <ul class="menu" id="existing-account">
                 <li>Information</li>
                 <li>My Account</li>
                 <li><a href="./wishlist.html">My wishlists</a></li>
@@ -43,9 +43,8 @@
               </ul>
             </div>
           </li>
-          
         </ul>
-      </div> 
+      </div>
       <div class="wrapper-header">
         <div class="wrraper-shopping-cart">
           <div class="shopping-cart dropdown">
@@ -58,23 +57,23 @@
                   <span>Shopping Cart</span>
                 </div>
                 <div class="total-price">
-                  <span>$34.27 </span>
+                  <span class="total-products-price">0</span>
                   <span>-</span>
                   <span id="number-product">0<span></span>item</span>
                 </div>
-                
+
               </div>
             </div>
-            <div class="dropdown-menu menu" >
+            <div class="dropdown-menu menu">
               <p id="empty-products">There are no items in your cart.</p>
               <div class="items" id="exist-products">
                 <ul id="cart-products"></ul>
                 <div class="total">
                   <span>total</span>
-                  <span id="total">325$</span>
+                  <span class="total-products-price">0</span>
                 </div>
                 <div class="buttons">
-                  <button><a href="#">check out</a></button>
+                  <button><a href="./check-out.html">check out</a></button>
                   <button><a href="./cart.html">View Cart</a></button>
                 </div>
               </div>
@@ -92,7 +91,20 @@
             <span class="number-cart">0</span>
           </div>
           <div class="search">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="icon-search" id="icon-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="wrapper-search" id="wrapper-search">
+              <div class="wrapper-input-search">
+                <input type="search" placeholder="Search For Product..." id="search" />
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <div class="result">
+                <ul id="result">
+
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="nav" id="bars">
             <i class="fa-solid fa-bars"></i>

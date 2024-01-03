@@ -1,14 +1,25 @@
 import { dropdDownMenu } from "./dropdown.js";
 import { openedNavbar, closedNavbar } from "./navbar.js";
-dropdDownMenu();
-openedNavbar();
-closedNavbar();
+import {search} from "./search.js";
+import {getData} from "./api.js";
 let products = JSON.parse(localStorage.getItem("cart")) || [];
 let cart = document.getElementById("cart");
 console.log('cart cart', cart);
 const totalPrice = document.getElementById("total-price");
 const totalTax = document.getElementById("total-tax");
-let items = []
+const countProduct = document.getElementById("number-product");
+const total = document.querySelectorAll(".total-products-price");
+const cartProducts = document.getElementById("cart-products");
+const existProducts = document.getElementById("exist-products");
+const emptyProducts = document.getElementById("empty-products");
+// let items = []
+const getDataProducts = async()=>{
+  const response = await getData();
+  // console.log('response', response);
+  let listOfData = response;
+  search(listOfData);
+}
+getDataProducts();
 function renderCart(product) {
   let template=``;
   let sum = 0;
@@ -16,7 +27,7 @@ function renderCart(product) {
   let totalSub=0
   for (let i = 0; i < product.length; i++) {
     const element = product[i];
-    console.log('rendering element', element);
+    // console.log('rendering element', element);
     sum =element.price*element.count;
     template += `
     <li>
@@ -40,10 +51,10 @@ function renderCart(product) {
         <span class = 'count-minus' data-id="${element.id}">-</span>
       </div>
     </div>
-    <div class="all-total column">
+    <div class="all-total column" >
       <span class='total'>${sum}</span>
     </div>
-    <div class="delete column" onclick="removeProduct(${element.id})">
+    <div class="delete column" data-id="${element.id}" >
       <i class="fa-solid fa-trash"></i>
     </div>
   </li>
@@ -53,9 +64,11 @@ function renderCart(product) {
   totalPrice.innerHTML = totalSub;
   totalTax.innerHTML = totalSub;
   cart.innerHTML = template;
-  console.log('sum' , sum);
+  // console.log('sum' , sum);
   const countPlus= document.querySelectorAll('.count-plus');
   const countMinus = document.querySelectorAll('.count-minus');
+  const deleteProduct = document.querySelectorAll('.delete');
+  // console.log('delete product' , deleteProduct);
   countPlus.forEach((el)=>{
     el.addEventListener('click',function(){
       let countElement = el.parentElement.previousElementSibling;
@@ -76,16 +89,17 @@ function renderCart(product) {
       
     });
   })
+  deleteProduct.forEach((el)=>{
+    el.addEventListener('click',function(){
+      console.log('el' , el);
+      let id = el.dataset.id ;
+      console.log('id' , id);
+      removeProduct(id);
+    });
+  });
 }
-renderCart(products)
-function removeProduct(id){
-  const index = products.findIndex((product) => product.id === id);
-  if (index !== -1) {
-      products.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(products));
-      renderCart(products);
-  }  
-}
+
+
 function update(id , count){
   const foundProduct = products.find((product) => product.id == id);
   if (foundProduct) {
@@ -94,3 +108,90 @@ function update(id , count){
     renderCart(products)
   }
 }
+function getProducts() {
+  if (products.length == 0) {
+    // console.log("no products found");
+  } else {
+    emptyProducts.style.cssText = "display:none;";
+    existProducts.style.cssText = "display:block;";
+    // console.log(" products found");
+    let product = "";
+    for (let i = 0; i < products.length; i++) {
+      const element = products[i];
+      product += `
+      <li>
+        <div class="img">
+          <img src=${element.img} alt=${element.title}>
+        </div>
+        <div class="text">
+          <p>${element.title}</p>
+          <div class="price-container">
+            <span class="count">${element.count} x</span>
+            <span class="price">${element.price}</span>
+          </div>
+          <div class="delete delete delete-products" data-id="${element.id}">
+            <span>x</span>
+          </div>
+        </div>
+      </li>
+      `;
+    }
+    cartProducts.innerHTML = product;
+    const deleteProduct = document.querySelectorAll('.delete-products');
+    console.log('delete product' , deleteProduct);
+    deleteProduct.forEach((el)=>{
+      el.addEventListener('click',function(){
+        // console.log('el' , el);
+        let id = el.dataset.id ;
+        console.log('id' , id);
+        removeProduct(id);
+      });
+    });
+    console.log('productsgeeee = ' , products);
+  }
+}
+function getTotalCount() {
+  let totalCount = 0;
+  for (const item of products) {
+    totalCount += +item.count;
+  }
+  return totalCount;
+}
+function getTotalPrice() {
+  let sum = 0;
+  let total = 0;
+  let totalSub = 0;
+  for (const item of products) {
+    sum = item.price * item.count;
+    totalSub = Math.ceil((total += sum));
+  }
+  // console.log('sum = ' + totalSub);
+  return totalSub;
+}
+function removeProduct(id){
+  // console.log('id' ,'fu' , id);
+  const index = products.findIndex((product) => product.id == id);
+  console.log('index', index);
+  if (index !== -1) {
+      products.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(products));
+      countProduct.textContent = getTotalCount();
+      total.forEach((total)=>{
+      total.textContent = getTotalPrice() +'  '+'EGP';
+      getProducts();
+      renderCart(products);
+})
+ 
+  }  
+  console.log('products.length = ' , products);
+}
+countProduct.textContent = getTotalCount();
+
+total.forEach((total)=>{
+  total.textContent = getTotalPrice() +'  '+'EGP';
+})
+dropdDownMenu();
+openedNavbar();
+closedNavbar();
+getProducts();
+renderCart(products);
