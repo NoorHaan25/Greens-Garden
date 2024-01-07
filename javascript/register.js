@@ -55,6 +55,7 @@ function validEmail() {
   const icon = emailInput.nextElementSibling;
   if(isEmailValid){
     icon.style.display = 'inline-block';
+    emailInput.style.cssText = 'border: 1px solid green';
     }else{
     icon.style.display = 'none';
     emailInput.style.cssText = 'border: 1px solid red';
@@ -80,8 +81,9 @@ function validLastName(){
 registerForm.onsubmit= function(e){
   e.preventDefault();
   validFirstName()
-validEmail()
-validLastName()
+  validEmail()
+  validLastName()
+  // console.log('validEmail' , validEmail());
 window.scrollTo(0, 0);
 genderinput.forEach(el=>{
   if(el.checked){
@@ -92,12 +94,6 @@ genderinput.forEach(el=>{
     el.nextElementSibling.classList.add('invalid');
   }
 })
-if(privacyPolicyInput.checked){
-  console.log('checking privacy policy');
-  selectPrivacyPolicy=true;
-}else{
-  privacyPolicyInput.nextElementSibling.classList.add('invalid');
-}
 if (checkedCount > 0) {
   genderinput.forEach(el => {
     if (!el.checked) {
@@ -105,6 +101,13 @@ if (checkedCount > 0) {
     }
   });
 }
+if(privacyPolicyInput.checked){
+  console.log('checking privacy policy');
+  selectPrivacyPolicy=true;
+}else{
+  privacyPolicyInput.nextElementSibling.classList.add('invalid');
+}
+
 if(isFirstNameValid && isLastNameValid && isEmailValid && selectedGender && selectPrivacyPolicy){
   // console.log('okkkkkkk');
   if (localStorage.getItem("users") != null) {
@@ -123,6 +126,7 @@ if(isFirstNameValid && isLastNameValid && isEmailValid && selectedGender && sele
         setTimeout(function(){
           haveAccount.style.cssText="display:none;";
         },1000)
+        break;
       }else (element.email != emailInput.value)
         let user = {
           firstName: firstNameInput.value,
@@ -133,21 +137,26 @@ if(isFirstNameValid && isLastNameValid && isEmailValid && selectedGender && sele
         console.log('user registration' , user);
         userRegister.push(user);
         localStorage.setItem("users", JSON.stringify(userRegister));
+        setTimeout(() => {
+          window.location = "login.html"
+        }, 2000);
       }
+    }else if(userRegister.length == 0){
+      let user = {
+        firstName: firstNameInput.value,
+        lastNameInput: lastNameInput.value,
+        email: emailInput.value,
+        password: password.value,
+      };
+      userRegister.push(user);
+      localStorage.setItem("users", JSON.stringify(userRegister));
+      setTimeout(() => {
+        window.location = "login.html"
+      }, 2000);
     }
-  }else if(userRegister.length == 0){
-    let user = {
-      firstName: firstNameInput.value,
-      lastNameInput: lastNameInput.value,
-      email: emailInput.value,
-      password: password.value,
-    };
-    userRegister.push(user);
-    localStorage.setItem("users", JSON.stringify(userRegister));
+    
   }
-  setTimeout(() => {
-    window.location = "login.html"
-  }, 2000);
+
 }
 
 dropdDownMenu();
