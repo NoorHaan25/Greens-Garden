@@ -4,11 +4,12 @@ import {loadingPage} from "./loading.js";
 const passwordLogin = document.getElementById('password-login');
 const emailLogin = document.getElementById('email-login');
 const loginButton = document.getElementById('login-button');
+
 // console.log(passwordLogin, emailLogin , loginButton) ;
 
 let getData =JSON.parse(localStorage.getItem("users"));
 console.log('uers' , getData);
-  loginButton.addEventListener('click', function(){
+  loginButton.addEventListener('click', function(e){
     e.preventDefault();
     for (let i = 0; i < getData.length; i++) {
       if (getData[i].email === emailLogin.value) {
