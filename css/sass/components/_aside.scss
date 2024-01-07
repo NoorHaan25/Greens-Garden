@@ -24,7 +24,7 @@ aside {
     .body-box {
       padding: 30px 20px;
       display: flex;
-      justify-content: center;
+      // justify-content: center;
       @include maxExtraSmall{
         flex-direction: column;
       }
@@ -60,7 +60,7 @@ aside {
           display: flex;
           align-items: center;
           margin-bottom: 20px;
-
+          flex-wrap: wrap;
           .img {
             margin: 10px;
           }

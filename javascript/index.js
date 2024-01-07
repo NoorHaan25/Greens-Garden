@@ -3,6 +3,8 @@ import { dropdDownMenu } from "./dropdown.js";
 import { getData } from "./api.js";
 import { generateStarRating } from "./generateStartRating.js";
 import {search} from "./search.js";
+import {loadingPage} from "./loading.js";
+
 // search()
 const angleLeft = document.querySelectorAll(".fa-angle-left");
 const angleRight = document.querySelectorAll(".fa-angle-right");
@@ -25,16 +27,16 @@ angleRight.forEach((el)=>{
   })
 })
 const total = document.querySelectorAll(".total-products-price");
-const countProduct = document.getElementById("number-product");
-const existProducts = document.getElementById("exist-products");
-const emptyProducts = document.getElementById("empty-products");
-const cartProducts = document.getElementById("cart-products");
+const existProducts = document.querySelectorAll(".exist-products");
+const emptyProducts = document.querySelectorAll(".empty-products");
+const countProduct = document.querySelectorAll(".number-product");
+const cartProducts = document.querySelectorAll(".cart-products");
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let cartFav = [];
 let productsFlowers = [];
 /*                                             start section countdown                                                */
 function countdown() {
-    let countDown = new Date("jan,1 2024 24:00:00").getTime();
+    let countDown = new Date("feb,1 2024 24:00:00").getTime();
     let count = setInterval(() => {
         let now = new Date().getTime();
         let differenceDate = countDown - now;
@@ -94,6 +96,7 @@ const getDataProducts = async () => {
     productsFlowers = listOfData;
     display(listOfData);
     search(listOfData);
+    randomProducts(listOfData)
 };
 function display(products) {
     // console.log("products", products);
@@ -243,7 +246,7 @@ function display(products) {
         });
     });
   }
-function getTotalCount() {
+  function getTotalCount() {
     let totalCount = 0;
     for (const item of cart) {
       totalCount += +item.count;
@@ -274,7 +277,9 @@ function getTotalCount() {
       cart.push({ ...choosenProduct, count: counts, total: 0 });
       console.log("not existing product", cart);
     }
-    countProduct.textContent = getTotalCount();
+    countProduct.forEach((el)=>{
+      el.textContent = getTotalCount();
+    })
     localStorage.setItem("cart", JSON.stringify(cart));
     total.forEach((total)=>{
       total.textContent = getTotalPrice() +'  '+'EGP';
@@ -282,30 +287,42 @@ function getTotalCount() {
     getProducts();
   }
   function update(index, count) {
-    const chosenProduct = productsFlowers[index];
-    const foundProduct = cart.find((product) => product.id === chosenProduct.id);
-    if (foundProduct) {
-      foundProduct.count = count;
-      countProduct.textContent = getTotalCount();
-      localStorage.setItem("cart", JSON.stringify(cart));
-      total.forEach((total)=>{
-        total.textContent = getTotalPrice() +'  '+'EGP';
-      })
-      getProducts();
-    }
+      const chosenProduct = productsFlowers[index];
+      const foundProduct = cart.find((product) => product.id === chosenProduct.id);
+      if (foundProduct) {
+        foundProduct.count = count;
+        countProduct.forEach((el)=>{
+          el.textContent = getTotalCount();
+        })
+        total.forEach((total)=>{
+          total.textContent = getTotalPrice() +'  '+'EGP';
+        })
+        localStorage.setItem("cart", JSON.stringify(cart));
+        getProducts();
+      }
   }
   function getProducts() {
     if (cart.length == 0) {
       console.log("no products found");
+      emptyProducts.forEach((el)=>{
+        el.style.cssText = "display:block;";
+      })
+      existProducts.forEach((el)=>{
+        el.style.cssText = "display:none;";
+      })
     } else {
-      emptyProducts.style.cssText = "display:none;";
-      existProducts.style.cssText = "display:block;";
+      emptyProducts.forEach((el)=>{
+        el.style.cssText = "display:none;";
+      })
+      existProducts.forEach((el)=>{
+        el.style.cssText = "display:block;";
+      })
       console.log(" products found");
       let products = "";
       for (let i = 0; i < cart.length; i++) {
         const element = cart[i];
         products += `
-        <li>
+        <li class='list'>
           <div class="img">
             <img src=${element.img} alt=${element.title}>
           </div>
@@ -315,23 +332,21 @@ function getTotalCount() {
               <span class="count">${element.count} x</span>
               <span class="price">${element.price}</span>
             </div>
-            <div class="delete" data-id="${element.id}">
-              <span>x</span>
-            </div>
+            <div>
+            <span class="delete" data-id="${element.id}">x</span>
+          </div>
           </div>
         </li>
         `;
       }
-      cartProducts.innerHTML = products;
+      cartProducts.forEach((el)=>{
+        el.innerHTML = products;
+      })
       const deleteProduct = document.querySelectorAll('.delete');
       console.log('delete product' , deleteProduct);
       deleteProduct.forEach((el)=>{
-        el.addEventListener('click',function(){
-          // console.log('el' , el);
-          let id = el.dataset.id ;
-          console.log('id' , id);
-          removeProduct(id);
-        });
+        el.addEventListener('click', onDeleteProduct);
+        // console.log('produ len' , cart.length);
       });
     }
   }
@@ -351,25 +366,91 @@ function createUsername() {
         notExistingAccount.style.cssText = "display:block;";
     }
   }
-function removeProduct(id){
-  // console.log('id' ,'fu' , id);
-  const index = cart.findIndex((product) => product.id == id);
-  console.log('index', index);
-  if (index !== -1) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      countProduct.textContent = getTotalCount();
-      total.forEach((total)=>{
-      total.textContent = getTotalPrice() +'  '+'EGP';
-      getProducts();
-})
+  function onDeleteProduct(event){
+    const id = event.target.dataset.id ;
+    console.log('event.target.dataset' , event.target.dataset.id);
+    removeProduct(id)
+    const liElement = event.target.closest('li.list');
+    console.log('li.list' , liElement);
+    if (liElement) {
+      liElement.remove(); 
+    }
+  }
+  function removeProduct(id){
+    const index = cart.findIndex((product) => product.id == id);
+    if (index !== -1) {
+      console.log('insideindex', index);
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        countProduct.forEach((el)=>{
+          el.textContent = getTotalCount();
+        });
+        total.forEach((total)=>{
+          total.textContent = getTotalPrice() +'  '+'EGP';
+          })
+  getProducts();
   
-  }  
-}
-  countProduct.textContent = getTotalCount();
+    } 
+  }
+countProduct.forEach((el)=>{
+  el.textContent = getTotalCount();
+});
   total.forEach((total)=>{
     total.textContent = getTotalPrice() +'  '+'EGP';
+})
+function randomProducts(products) {
+  console.log('randomProducts', products);
+  const title = document.getElementById('title-random');
+  const price = document.getElementById('price-random');
+  const add = document.getElementById('add-random');
+  const countsElement = document.getElementById('count-random');
+  const down = document.getElementById('down');
+  const up  = document.getElementById('up');
+  let randomIndex = Math.floor(Math.random() * products.length) ;
+  //console.log('randomProduct', randomIndex );
+  const randomProduct = products[randomIndex];
+  console.log('randomProduct', typeof(randomProduct));
+  title.textContent = randomProduct.title;
+  price.textContent = randomProduct.price + ' ' + 'EGP';
+  add.addEventListener('click' , ()=>{
+    let findProduct = cart.find(function (product) {
+      return product.id == randomProduct.id;
+    });
+
+    if (findProduct) {
+      console.log("isexisting product");
+    } else {
+      cart.push({ ...randomProduct, count: parseInt(countsElement.textContent), total: 0 });
+      console.log("not existing product", cart);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
   })
+  up.addEventListener('click',()=>{
+    +countsElement.innerHTML++;
+    updateRandomProduct(randomProducts , countsElement.textContent)
+  })
+  down.addEventListener('click',()=>{
+    const counts = parseInt(countsElement.textContent);
+    if (counts > 1) {
+      countsElement.textContent = counts - 1;
+      updateRandomProduct(randomProduct , countsElement.textContent)
+    }
+  })
+} 
+function updateRandomProduct(product, count) {
+  const foundProduct = cart.find((product) => product.id === product.id);
+  if (foundProduct) {
+    foundProduct.count = count;
+    countProduct.forEach((el)=>{
+      el.textContent = getTotalCount();
+    })
+    total.forEach((total)=>{
+      total.textContent = getTotalPrice() +'  '+'EGP';
+    })
+    localStorage.setItem("cart", JSON.stringify(cart));
+    getProducts();
+  }
+}
 getProducts();
 createUsername();
 sliderImages();
@@ -378,3 +459,4 @@ openedNavbar();
 closedNavbar();
 dropdDownMenu();
 getDataProducts();
+loadingPage();

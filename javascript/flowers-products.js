@@ -3,13 +3,14 @@ import { openedNavbar, closedNavbar } from "./navbar.js";
 import {getData} from "./api.js";
 import {generateStarRating} from "./generateStartRating.js"
 import {search} from "./search.js";
+import {loadingPage} from "./loading.js";
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let cartFav = [];
 const products = document.getElementById("products");
-const countProduct = document.getElementById("number-product");
-const existProducts = document.getElementById("exist-products");
-const emptyProducts = document.getElementById("empty-products");
-const cartProducts = document.getElementById("cart-products");
+const cartProducts = document.querySelectorAll(".cart-products");
+const existProducts = document.querySelectorAll(".exist-products");
+const emptyProducts = document.querySelectorAll(".empty-products");
+const countProduct = document.querySelectorAll(".number-product");
 const total = document.querySelectorAll(".total-products-price");
 console.log('Total' , countProduct);
 let selectedCategory = "";
@@ -171,7 +172,10 @@ function update(id, count) {
   let existProduct = cart.find((product)=>product.id == id);
   if (existProduct) {
     existProduct.count = count;
-    countProduct.textContent = getTotalCount();
+    countProduct.forEach((el)=>{
+      el.textContent = getTotalCount();
+    });
+    
     total.forEach((total)=>{
       total.textContent = getTotalPrice() +'  '+'EGP';
     })
@@ -181,16 +185,25 @@ function update(id, count) {
 }
 function getProducts() {
   if (cart.length == 0) {
-    // console.log("no products found");
+    emptyProducts.forEach((el)=>{
+      el.style.cssText = "display:block;";
+    })
+    existProducts.forEach((el)=>{
+      el.style.cssText = "display:none;";
+    })
   } else {
-    emptyProducts.style.cssText = "display:none;";
-    existProducts.style.cssText = "display:block;";
+    emptyProducts.forEach((el)=>{
+      el.style.cssText = "display:none;";
+    })
+    existProducts.forEach((el)=>{
+      el.style.cssText = "display:block;";
+    })
     // console.log(" products found");
     let products = "";
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
       products += `
-      <li>
+      <li class='list'>
         <div class="img">
           <img src=${element.img} alt=${element.title}>
         </div>
@@ -200,25 +213,23 @@ function getProducts() {
             <span class="count">${element.count} x</span>
             <span class="price">${element.price}</span>
           </div>
-          <div class="delete">
-            <span>x</span>
-          </div>
+          <div>
+          <span class="delete" data-id="${element.id}">x</span>
+        </div>
         </div>
       </li>
       `;
     }
-    cartProducts.innerHTML = products;
-    // const deleteProduct = document.querySelectorAll('.delete-products');
-    // console.log('delete product' , deleteProduct);
+    cartProducts.forEach((el)=>{
+      el.innerHTML = products;
+    })
+    const deleteProduct = document.querySelectorAll('.delete');
+    console.log('delete product' , deleteProduct);
     
-    // deleteProduct.forEach((el)=>{
-    //   el.addEventListener('click',function(){
-    //     // console.log('el' , el);
-    //     let id = el.dataset.id ;
-    //     console.log('id' , id);
-    //     // removeProduct(id);
-    //   });
-    // });
+    deleteProduct.forEach((el)=>{
+      el.addEventListener('click', onDeleteProduct);
+      // console.log('produ len' , cart.length);
+    });
   }
 }
 function applyFilters(products) {
@@ -365,7 +376,35 @@ function moreDetails(id) {
     details.style.cssText = "display:none;";
   });
 }
-countProduct.textContent = getTotalCount();
+function onDeleteProduct(event){
+  const id = event.target.dataset.id ;
+  console.log('event.target.dataset' , event.target.dataset.id);
+  removeProduct(id)
+  const liElement = event.target.closest('li.list');
+  console.log('li.list' , liElement);
+  if (liElement) {
+    liElement.remove(); 
+  }
+}
+function removeProduct(id){
+  const index = cart.findIndex((product) => product.id == id);
+  if (index !== -1) {
+    console.log('insideindex', index);
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      countProduct.forEach((el)=>{
+        el.textContent = getTotalCount();
+      });
+      total.forEach((total)=>{
+      total.textContent = getTotalPrice() +'  '+'EGP';
+})
+getProducts();
+
+  } 
+}
+countProduct.forEach((el)=>{
+  el.textContent = getTotalCount();
+});
 
 total.forEach((total)=>{
   total.textContent = getTotalPrice() +'  '+'EGP';
@@ -375,3 +414,4 @@ getProducts();
 openedNavbar();
 closedNavbar();
 dropdDownMenu();
+loadingPage();

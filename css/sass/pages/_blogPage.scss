@@ -8,7 +8,7 @@
       flex-direction: column;
     }
     aside {
-      width: calc(20% - 10px);
+      width: calc(30% - 10px);
       margin-right: 10px;
       @include maxSmall{
         order: 2;
@@ -32,7 +32,6 @@
         }
         .body-box {
           padding: 30px 20px;
-
           a {
             color: $color-light-gray;
             transition: all 0.3s linear;
@@ -57,7 +56,7 @@
               margin-bottom: 20px;
               .img {
                 margin: 10px;
-                width: 200px;
+                // width: 200px;
               }
               .text-post {
                 a {
@@ -104,7 +103,7 @@
       }
     }
     .posts{
-      width: calc(80% - 10px);
+      width: calc(70% - 10px);
       margin-left: 10px;
       display: flex;
       align-items: center;

@@ -1,8 +1,6 @@
 import { dropdDownMenu } from "./dropdown.js";
 import { openedNavbar, closedNavbar } from "./navbar.js";
-dropdDownMenu();
-openedNavbar();
-closedNavbar();
+import {loadingPage} from "./loading.js";
 const passwordLogin = document.getElementById('password-login');
 const emailLogin = document.getElementById('email-login');
 const loginButton = document.getElementById('login-button');
@@ -26,3 +24,7 @@ loginForm.onsubmit= function(e){
     }
   })
 }
+dropdDownMenu();
+openedNavbar();
+closedNavbar();
+loadingPage();

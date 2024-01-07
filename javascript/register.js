@@ -1,8 +1,6 @@
 import { dropdDownMenu } from "./dropdown.js";
 import { openedNavbar, closedNavbar } from "./navbar.js";
-dropdDownMenu();
-openedNavbar();
-closedNavbar();
+import {loadingPage} from "./loading.js";
 const button = document.getElementById('button-password');
 const password = document.getElementById('password-register');
 const firstNameInput = document.getElementById('first-name');
@@ -151,3 +149,8 @@ if(isFirstNameValid && isLastNameValid && isEmailValid && selectedGender && sele
     window.location = "login.html"
   }, 2000);
 }
+
+dropdDownMenu();
+openedNavbar();
+closedNavbar();
+loadingPage();

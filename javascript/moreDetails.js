@@ -12,10 +12,10 @@ const plus = document.querySelector('.plus');
 const minus = document.querySelector('.minus');
 const countContent = document.querySelector('.count-content');
 const add = document.querySelector('.add');
-const cartProducts = document.getElementById("cart-products");
-const existProducts = document.getElementById("exist-products");
-const emptyProducts = document.getElementById("empty-products");
-const countProduct = document.getElementById("number-product");
+const cartProducts = document.querySelectorAll(".cart-products");
+const existProducts = document.querySelectorAll(".exist-products");
+const emptyProducts = document.querySelectorAll(".empty-products");
+const countProduct = document.querySelectorAll(".number-product");
 const total = document.querySelectorAll(".total-products-price");
 // console.log(plus , minus , countContent);
 // console.log('selectedProduct', productSearchResult);
@@ -81,11 +81,14 @@ function update(count) {
   let existProduct = cart.find((product)=>product.id == productSearchResult.id);
   if (existProduct) {
     existProduct.count = count;
-    countProduct.textContent = getTotalCount();
+    // countProduct.textContent = getTotalCount();
     localStorage.setItem("cart", JSON.stringify(cart));
     total.forEach((total)=>{
       total.textContent = getTotalPrice();
     })
+    countProduct.forEach((el)=>{
+      el.textContent = getTotalCount();
+    });
     getProducts();
   }
 }
@@ -93,8 +96,12 @@ function getProducts() {
   if (cart.length == 0) {
     // console.log("no products found");
   } else {
-    emptyProducts.style.cssText = "display:none;";
-    existProducts.style.cssText = "display:block;";
+    emptyProducts.forEach((el)=>{
+      el.style.cssText = "display:none;";
+    })
+    existProducts.forEach((el)=>{
+      el.style.cssText = "display:block;";
+    })
     // console.log(" products found");
     let products = "";
     for (let i = 0; i < cart.length; i++) {
@@ -117,7 +124,9 @@ function getProducts() {
       </li>
       `;
     }
-    cartProducts.innerHTML = products;
+    cartProducts.forEach((el)=>{
+      el.innerHTML = products;
+    })
     const deleteProduct = document.querySelectorAll('.delete');
     console.log('delete product' , deleteProduct);
     deleteProduct.forEach((el)=>{
@@ -137,7 +146,9 @@ function removeProduct(id){
   if (index !== -1) {
       cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(cart));
-      countProduct.textContent = getTotalCount();
+      countProduct.forEach((el)=>{
+        el.textContent = getTotalCount();
+      });
       total.forEach((total)=>{
       total.textContent = getTotalPrice() +'  '+'EGP';
       getProducts();
@@ -148,7 +159,9 @@ function removeProduct(id){
 total.forEach((total)=>{
   total.textContent = getTotalPrice();
 })
-countProduct.textContent = getTotalCount();
+countProduct.forEach((el)=>{
+  el.textContent = getTotalCount();
+});
 
 getDataProducts();
 openedNavbar();

@@ -2,16 +2,18 @@ import { dropdDownMenu } from "./dropdown.js";
 import { openedNavbar, closedNavbar } from "./navbar.js";
 import {search} from "./search.js";
 import {getData} from "./api.js";
-let products = JSON.parse(localStorage.getItem("cart")) || [];
-let cart = document.getElementById("cart");
+import {loadingPage} from "./loading.js";
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cartElement = document.getElementById("cart");
 console.log('cart cart', cart);
-const totalPrice = document.getElementById("total-price");
-const totalTax = document.getElementById("total-tax");
-const countProduct = document.getElementById("number-product");
+//const totalPrice = document.getElementById("total-price");
+//const totalTax = document.getElementById("total-tax");
+const countProduct = document.querySelectorAll(".number-product");
 const total = document.querySelectorAll(".total-products-price");
-const cartProducts = document.getElementById("cart-products");
-const existProducts = document.getElementById("exist-products");
-const emptyProducts = document.getElementById("empty-products");
+const cartProducts = document.querySelectorAll(".cart-products");
+const existProducts = document.querySelectorAll(".exist-products");
+const emptyProducts = document.querySelectorAll(".empty-products");
+console.log(cartProducts , existProducts , emptyProducts);
 // let items = []
 const getDataProducts = async()=>{
   const response = await getData();
@@ -30,7 +32,7 @@ function renderCart(product) {
     // console.log('rendering element', element);
     sum =element.price*element.count;
     template += `
-    <li>
+    <li class='list'>
     <div class="img column">
       <img src=${element.img} alt=${element.title}>
     </div>
@@ -61,9 +63,9 @@ function renderCart(product) {
     `
     totalSub= Math.ceil(total+=sum);
   }
-  totalPrice.innerHTML = totalSub;
-  totalTax.innerHTML = totalSub;
-  cart.innerHTML = template;
+  // totalPrice.innerHTML = totalSub;
+  // totalTax.innerHTML = totalSub;
+  cartElement.innerHTML = template;
   // console.log('sum' , sum);
   const countPlus= document.querySelectorAll('.count-plus');
   const countMinus = document.querySelectorAll('.count-minus');
@@ -90,36 +92,46 @@ function renderCart(product) {
     });
   })
   deleteProduct.forEach((el)=>{
-    el.addEventListener('click',function(){
-      console.log('el' , el);
-      let id = el.dataset.id ;
-      console.log('id' , id);
-      removeProduct(id);
-    });
+    // el.addEventListener('click',
+    el.addEventListener('click', onDeleteProduct);
+    // function(){
+    //   console.log('el' , el);
+    //   let id = el.dataset.id ;
+    //   console.log('id' , id);
+    //   removeProduct(id);
+    // }
+    // );
   });
 }
-
-
 function update(id , count){
   const foundProduct = products.find((product) => product.id == id);
   if (foundProduct) {
     foundProduct.count = count;
     localStorage.setItem("cart" , JSON.stringify(products));
-    renderCart(products)
+    renderCart(cart)
   }
 }
 function getProducts() {
-  if (products.length == 0) {
-    // console.log("no products found");
+  if (cart.length == 0) {
+    emptyProducts.forEach((el)=>{
+      el.style.cssText = "display:block;";
+    })
+    existProducts.forEach((el)=>{
+      el.style.cssText = "display:none;";
+    })
   } else {
-    emptyProducts.style.cssText = "display:none;";
-    existProducts.style.cssText = "display:block;";
+    emptyProducts.forEach((el)=>{
+      el.style.cssText = "display:none;";
+    })
+    existProducts.forEach((el)=>{
+      el.style.cssText = "display:block;";
+    })
     // console.log(" products found");
-    let product = "";
-    for (let i = 0; i < products.length; i++) {
-      const element = products[i];
-      product += `
-      <li>
+    let products = "";
+    for (let i = 0; i < cart.length; i++) {
+      const element = cart[i];
+      products += `
+      <li class='list'>
         <div class="img">
           <img src=${element.img} alt=${element.title}>
         </div>
@@ -129,30 +141,28 @@ function getProducts() {
             <span class="count">${element.count} x</span>
             <span class="price">${element.price}</span>
           </div>
-          <div class="delete delete delete-products" data-id="${element.id}">
-            <span>x</span>
-          </div>
+          <div>
+          <span class="delete" data-id="${element.id}">x</span>
+        </div>
         </div>
       </li>
       `;
     }
-    cartProducts.innerHTML = product;
-    const deleteProduct = document.querySelectorAll('.delete-products');
+    cartProducts.forEach((el)=>{
+      el.innerHTML = products;
+    })
+    const deleteProduct = document.querySelectorAll('.delete');
     console.log('delete product' , deleteProduct);
+    
     deleteProduct.forEach((el)=>{
-      el.addEventListener('click',function(){
-        // console.log('el' , el);
-        let id = el.dataset.id ;
-        console.log('id' , id);
-        removeProduct(id);
-      });
+      el.addEventListener('click', onDeleteProduct);
+      // console.log('produ len' , cart.length);
     });
-    console.log('productsgeeee = ' , products);
   }
 }
 function getTotalCount() {
   let totalCount = 0;
-  for (const item of products) {
+  for (const item of cart) {
     totalCount += +item.count;
   }
   return totalCount;
@@ -161,31 +171,42 @@ function getTotalPrice() {
   let sum = 0;
   let total = 0;
   let totalSub = 0;
-  for (const item of products) {
+  for (const item of cart) {
     sum = item.price * item.count;
     totalSub = Math.ceil((total += sum));
   }
   // console.log('sum = ' + totalSub);
   return totalSub;
 }
+function onDeleteProduct(event){
+  const id = event.target.dataset.id ;
+  console.log('event.target.dataset' , event.target.dataset.id);
+  removeProduct(id)
+  const liElement = event.target.closest('li.list');
+  console.log('li.list' , liElement);
+  if (liElement) {
+    liElement.remove(); 
+  }
+}
 function removeProduct(id){
-  // console.log('id' ,'fu' , id);
-  const index = products.findIndex((product) => product.id == id);
-  console.log('index', index);
+  const index = cart.findIndex((product) => product.id == id);
   if (index !== -1) {
-      products.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(products));
-      countProduct.textContent = getTotalCount();
+    console.log('insideindex', index);
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      countProduct.forEach((el)=>{
+        el.textContent = getTotalCount();
+      });
       total.forEach((total)=>{
       total.textContent = getTotalPrice() +'  '+'EGP';
-      getProducts();
-      renderCart(products);
 })
- 
-  }  
-  console.log('products.length = ' , products);
+getProducts();
+
+  } 
 }
-countProduct.textContent = getTotalCount();
+countProduct.forEach((el)=>{
+  el.textContent = getTotalCount();
+});
 
 total.forEach((total)=>{
   total.textContent = getTotalPrice() +'  '+'EGP';
@@ -194,4 +215,5 @@ dropdDownMenu();
 openedNavbar();
 closedNavbar();
 getProducts();
-renderCart(products);
+renderCart(cart);
+loadingPage();

@@ -5,6 +5,18 @@
   .wrapper-whishlist{
     display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  .card {
+    width: calc((100% / 3) - 10px);
+    margin: 5px;
+    @include maxMedium{
+      width: calc((100% / 2) - 10px);
+    }
+    @include maxSmall{
+      width: 100%;
+      margin:5px 0;
+    }
+  }
   }
   .heart{
     display: flex;

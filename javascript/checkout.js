@@ -2,6 +2,7 @@ import { dropdDownMenu } from "./dropdown.js";
 import { openedNavbar, closedNavbar } from "./navbar.js";
 import {search} from "./search.js";
 import {getData} from "./api.js";
+import {loadingPage} from "./loading.js";
 const button = document.getElementById('button');
 const password = document.getElementById('password');
 const infoClient = document.getElementById('info-client');
@@ -13,11 +14,15 @@ const orderRecieve = document.getElementById('order-recieve');
 const buttonRecieve = document.getElementById('button-recieve');
 const genderinput = document.querySelectorAll('input[name="gender"]');
 // console.log('gender input' , genderinput);
-const existProducts = document.getElementById("exist-products");
-const emptyProducts = document.getElementById("empty-products");
-const cartProducts = document.getElementById("cart-products");
+// const existProducts = document.getElementById("exist-products");
+// const emptyProducts = document.getElementById("empty-products");
+// const cartProducts = document.getElementById("cart-products");
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// const countProduct = document.querySelectorAll(".number-product");
+const existProducts = document.querySelectorAll(".exist-products");
+const emptyProducts = document.querySelectorAll(".empty-products");
 const countProduct = document.querySelectorAll(".number-product");
+const cartProducts = document.querySelectorAll(".cart-products");
 const total = document.querySelectorAll(".total-products-price");
 let isFirstNameValid = false;
 let isLastNameValid= false;
@@ -144,15 +149,25 @@ function getTotalPrice() {
 function getProducts() {
   if (cart.length == 0) {
     console.log("no products found");
+    emptyProducts.forEach((el)=>{
+      el.style.cssText = "display:block;";
+    })
+    existProducts.forEach((el)=>{
+      el.style.cssText = "display:none;";
+    })
   } else {
-    emptyProducts.style.cssText = "display:none;";
-    existProducts.style.cssText = "display:block;";
+    emptyProducts.forEach((el)=>{
+      el.style.cssText = "display:none;";
+    })
+    existProducts.forEach((el)=>{
+      el.style.cssText = "display:block;";
+    })
     console.log(" products found");
     let products = "";
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
       products += `
-      <li>
+      <li class='list'>
         <div class="img">
           <img src=${element.img} alt=${element.title}>
         </div>
@@ -162,42 +177,49 @@ function getProducts() {
             <span class="count">${element.count} x</span>
             <span class="price">${element.price}</span>
           </div>
-          <div class="delete" data-id="${element.id}">
-            <span>x</span>
-          </div>
+          <div>
+          <span class="delete" data-id="${element.id}">x</span>
+        </div>
         </div>
       </li>
       `;
     }
-    cartProducts.innerHTML = products;
+    cartProducts.forEach((el)=>{
+      el.innerHTML = products;
+    })
     const deleteProduct = document.querySelectorAll('.delete');
     console.log('delete product' , deleteProduct);
     deleteProduct.forEach((el)=>{
-      el.addEventListener('click',function(){
-        // console.log('el' , el);
-        let id = el.dataset.id ;
-        console.log('id' , id);
-        removeProduct(id);
-      });
+      el.addEventListener('click', onDeleteProduct);
+      // console.log('produ len' , cart.length);
     });
   }
 }
+function onDeleteProduct(event){
+  const id = event.target.dataset.id ;
+  console.log('event.target.dataset' , event.target.dataset.id);
+  removeProduct(id)
+  const liElement = event.target.closest('li.list');
+  console.log('li.list' , liElement);
+  if (liElement) {
+    liElement.remove(); 
+  }
+}
 function removeProduct(id){
-  // console.log('id' ,'fu' , id);
   const index = cart.findIndex((product) => product.id == id);
-  console.log('index', index);
   if (index !== -1) {
+    console.log('insideindex', index);
       cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(cart));
-      countProduct.forEach((count)=>{
-        count.textContent= getTotalCount();
-      })
+      countProduct.forEach((el)=>{
+        el.textContent = getTotalCount();
+      });
       total.forEach((total)=>{
-      total.textContent = getTotalPrice() +'  '+'EGP';
-      getProducts();
-})
-  
-  }  
+        total.textContent = getTotalPrice() +'  '+'EGP';
+      })
+getProducts();
+
+  } 
 }
 countProduct.forEach((count)=>{
   count.textContent= getTotalCount();
@@ -209,3 +231,4 @@ dropdDownMenu();
 openedNavbar();
 closedNavbar();
 getProducts();
+loadingPage();

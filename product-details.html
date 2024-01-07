@@ -43,9 +43,7 @@
                 <li>Sign Out</li>
               </ul>
             </div>
-
           </li>
-
         </ul>
       </div>
       <div class="wrapper-header">
@@ -62,21 +60,21 @@
                 <div class="total-price">
                   <span class="total-products-price">0</span>
                   <span>-</span>
-                  <span id="number-product">0<span></span>item</span>
+                  <span class="number-product">0<span></span>item</span>
                 </div>
 
               </div>
             </div>
             <div class="dropdown-menu menu">
-              <p id="empty-products">There are no items in your cart.</p>
-              <div class="items" id="exist-products">
-                <ul id="cart-products"></ul>
+              <p class="empty-products">There are no items in your cart.</p>
+              <div class="items exist-products" id="exist-products">
+                <ul class="cart-products"></ul>
                 <div class="total">
                   <span>total</span>
                   <span class="total-products-price">0</span>
                 </div>
                 <div class="buttons">
-                  <button><a href="#">check out</a></button>
+                  <button><a href="./check-out.html">check out</a></button>
                   <button><a href="./cart.html">View Cart</a></button>
                 </div>
               </div>
@@ -89,9 +87,27 @@
           </div>
         </div>
         <div class="icons-header">
-          <div class="cart-icon">
-            <i class="fa fa-shopping-bag"></i>
-            <span class="number-cart">0</span>
+          <div class="dropdown">
+            <div class="cart-icon">
+              <div class="select">
+                <i class="fa fa-shopping-bag"></i>
+                <span class="number-product">0</span>
+              </div>
+              <div class="dropdown-menu menu">
+                <p class="empty-products">There are no items in your cart.</p>
+                <div class="items exist-products" id="exist-products">
+                  <ul class="cart-products"></ul>
+                  <div class="total">
+                    <span>total</span>
+                    <span class="total-products-price">0</span>
+                  </div>
+                  <div class="buttons">
+                    <button><a href="./check-out.html">check out</a></button>
+                    <button><a href="./cart.html">View Cart</a></button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="search">
             <div class="icon-search" id="icon-search">
@@ -247,6 +263,11 @@
     </div>
   </footer>
   <!-- end section footer -->
+  <div class="loading">
+    <div class="img">
+      <img src="./img/e13acccff048dbd34cdd7a3c539a68eb.gif" alt="loading">
+    </div>
+  </div>
   <script type="module" src="./javascript/moreDetails.js"></script>
 </body>
 </html>

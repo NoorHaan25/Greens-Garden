@@ -21,7 +21,7 @@
         font-weight: 500;
         border-bottom: 1px solid $color-border;
         &:last-child {
-          justify-content: center;
+          justify-content: space-between;
           border-bottom: unset;
           button {
             transition: all 0.3s linear;
