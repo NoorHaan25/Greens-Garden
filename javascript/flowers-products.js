@@ -12,6 +12,7 @@ const existProducts = document.querySelectorAll(".exist-products");
 const emptyProducts = document.querySelectorAll(".empty-products");
 const countProduct = document.querySelectorAll(".number-product");
 const total = document.querySelectorAll(".total-products-price");
+const userName = localStorage.getItem("userName");
 console.log('Total' , countProduct);
 let selectedCategory = "";
 let selectedColor = "";
@@ -69,9 +70,11 @@ function display(listOfData) {
       </div>
     </div>
   </div>
+  <div class="checked-login">
+    <p>Please log in to add to favorites.</p>
+  </div>
 </div>
   `;
-  
   }
   products.innerHTML = templateContent;
   let buttonAdd = document.querySelectorAll(".button-add");
@@ -115,18 +118,31 @@ function display(listOfData) {
     });
   });
   buttonHeart.forEach((el, index) => {
-    el.addEventListener("click", function () {
+    el.addEventListener("click", function(){
       // console.log(el , index);
-      const productFavorit = productsFlowers[index];
-      console.log("product", productFavorit);
-      let findProductFav = cartFav.find(function (productFav) {
-        return productFavorit.id === productFav.id;
-      });
-      if (!findProductFav) {
-        cartFav.push({ ...productFavorit });
+      if(userName !== null && userName !== undefined){
+        const productFavorit = productsFlowers[index];
+        console.log("product", productFavorit);
+        let findProductFav = cartFav.find(function (productFav) {
+          return productFavorit.id === productFav.id;
+        });
+        if (!findProductFav) {
+          cartFav.push({ ...productFavorit });
+        }
+        console.log("cartfa", cartFav);
+        localStorage.setItem("productFavorit", JSON.stringify(cartFav));
+      }else{
+        const clickedCard = el.closest('.card');
+        console.log('clickedCard', clickedCard);
+        const loginMessage = clickedCard.querySelector('.checked-login');
+        console.log('clickedCard', loginMessage);
+        if (loginMessage) {
+          loginMessage.classList.add("show-message");
+          setTimeout(function(){
+            loginMessage.classList.remove("show-message");
+          },3000)
+        }
       }
-      console.log("cartfa", cartFav);
-      localStorage.setItem("productFavorit", JSON.stringify(cartFav));
     });
   });
 }
@@ -161,7 +177,10 @@ function addCart( term  , id) {
     cart.push({ ...choosenProduct, count: counts, total: 0 });
     console.log("not existing product", cart);
   }
-  countProduct.textContent = getTotalCount();
+  countProduct.forEach((el)=>{
+    el.textContent = getTotalCount();
+  });
+  
   total.forEach((total)=>{
     total.textContent = getTotalPrice() +'  '+'EGP';
   })

@@ -5,9 +5,7 @@ import {getData} from "./api.js";
 import {loadingPage} from "./loading.js";
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let cartElement = document.getElementById("cart");
-console.log('cart cart', cart);
-//const totalPrice = document.getElementById("total-price");
-//const totalTax = document.getElementById("total-tax");
+// console.log('cart cart', cart);
 const countProduct = document.querySelectorAll(".number-product");
 const total = document.querySelectorAll(".total-products-price");
 const cartProducts = document.querySelectorAll(".cart-products");
@@ -27,6 +25,7 @@ function renderCart(product) {
   let sum = 0;
   let total=0;
   let totalSub=0
+  console.log('product' , product);
   for (let i = 0; i < product.length; i++) {
     const element = product[i];
     // console.log('rendering element', element);
@@ -92,23 +91,27 @@ function renderCart(product) {
     });
   })
   deleteProduct.forEach((el)=>{
-    // el.addEventListener('click',
-    el.addEventListener('click', onDeleteProduct);
-    // function(){
-    //   console.log('el' , el);
-    //   let id = el.dataset.id ;
-    //   console.log('id' , id);
-    //   removeProduct(id);
-    // }
-    // );
+    el.addEventListener('click', ()=>{
+      const id = el.dataset.id ;
+      console.log('id: ' , id);
+      removeProduct(id);
+    });
   });
 }
 function update(id , count){
-  const foundProduct = products.find((product) => product.id == id);
+  const foundProduct = cart.find((product) => product.id == id);
   if (foundProduct) {
     foundProduct.count = count;
-    localStorage.setItem("cart" , JSON.stringify(products));
+    localStorage.setItem("cart" , JSON.stringify(cart));
+    countProduct.forEach((el)=>{
+      el.textContent = getTotalCount();
+    });
+    
+    total.forEach((total)=>{
+      total.textContent = getTotalPrice() +'  '+'EGP';
+    })
     renderCart(cart)
+    getProducts();
   }
 }
 function getProducts() {
@@ -153,12 +156,15 @@ function getProducts() {
     })
     const deleteProduct = document.querySelectorAll('.delete');
     console.log('delete product' , deleteProduct);
-    
     deleteProduct.forEach((el)=>{
-      el.addEventListener('click', onDeleteProduct);
+      el.addEventListener('click', ()=>{
+        const id = el.dataset.id ;
+        removeProduct(id);
+      });
       // console.log('produ len' , cart.length);
     });
   }
+
 }
 function getTotalCount() {
   let totalCount = 0;
@@ -178,16 +184,20 @@ function getTotalPrice() {
   // console.log('sum = ' + totalSub);
   return totalSub;
 }
-function onDeleteProduct(event){
-  const id = event.target.dataset.id ;
-  console.log('event.target.dataset' , event.target.dataset.id);
-  removeProduct(id)
-  const liElement = event.target.closest('li.list');
-  console.log('li.list' , liElement);
-  if (liElement) {
-    liElement.remove(); 
-  }
-}
+// function onDeleteProduct(event){
+//   const id = event.target.dataset.id ;
+//   console.log('event.target.dataset' , event.target.dataset.id);
+//   removeProduct(id)
+//   const liElement = event.target.closest('li.list');
+//   console.log('li.list' , liElement);
+//   if (liElement) {
+//     liElement.remove(); 
+//     getProducts();
+//     renderCart(cart);
+  
+//   }
+  
+// }
 function removeProduct(id){
   const index = cart.findIndex((product) => product.id == id);
   if (index !== -1) {
@@ -199,15 +209,14 @@ function removeProduct(id){
       });
       total.forEach((total)=>{
       total.textContent = getTotalPrice() +'  '+'EGP';
-})
-getProducts();
-
+      })
+      getProducts();
+      renderCart(cart);
   } 
 }
 countProduct.forEach((el)=>{
   el.textContent = getTotalCount();
 });
-
 total.forEach((total)=>{
   total.textContent = getTotalPrice() +'  '+'EGP';
 })

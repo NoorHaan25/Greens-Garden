@@ -71,4 +71,16 @@
   &:hover > .icons-card{
     left: 20px;
   }
+  .checked-login{
+    position: absolute;
+    background-color: $color-black;
+    color: $color-white;
+    padding: 10px;
+    border-radius: 5px;
+    top: -100%;
+    transition: all 0.5s linear;
+  }
+  .show-message{
+    top: 10px;
+  }
 }
