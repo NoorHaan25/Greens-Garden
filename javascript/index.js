@@ -33,6 +33,9 @@ const countProduct = document.querySelectorAll(".number-product");
 const cartProducts = document.querySelectorAll(".cart-products");
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const userName = localStorage.getItem("userName");
+const signOut = document.getElementById("sign-out");
+const notExistingAccount = document.getElementById("not-existing-account");
+const existingAccount = document.getElementById("existing-account");
 let cartFav = [];
 let productsFlowers = [];
 /*                                             start section countdown                                                */
@@ -89,7 +92,6 @@ function sliderImages() {
   });
 }
 // console.log('getdata' , getData());
-
 const getDataProducts = async () => {
   const response = await getData();
   // console.log('response', response);
@@ -373,8 +375,6 @@ function getProducts() {
 /*                                             end section countdown                                                */
 function createUsername() {
   const userName = localStorage.getItem("userName");
-  const notExistingAccount = document.getElementById("not-existing-account");
-  const existingAccount = document.getElementById("existing-account");
   console.log("userName", userName);
   console.log("index: ", notExistingAccount, existingAccount);
   if (userName !== null) {
@@ -471,6 +471,12 @@ function updateRandomProduct(product, count) {
     getProducts();
   }
 }
+signOut.addEventListener('click',()=>{
+  console.log('signOut' , signOut);
+  localStorage.removeItem("userName");
+  existingAccount.style.cssText = "display:none;";
+  notExistingAccount.style.cssText = "display:block;";
+});
 getProducts();
 createUsername();
 sliderImages();
