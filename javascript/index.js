@@ -412,6 +412,58 @@ function removeProduct(id) {
 
   }
 }
+function moreDetails(id) {
+  let imgDetails = document.querySelector(".img-details");
+  let details = document.querySelector(".details");
+  let nameProduct = document.querySelector(".name-product");
+  let price = document.querySelector(".price-product");
+  let count = document.querySelector(".count-content");
+  let countNumber = count.innerHTML;
+  let buttonAdd = document.querySelector(".add");
+  let buttonPlusDetails = document.querySelector(".plus");
+  let buttonMinusDetails = document.querySelector(".minus");
+  let choosenProduct = productsFlowers;
+  console.log('choosen product' , choosenProduct);
+  const foundProduct = choosenProduct.find(product => product.id == id);
+  buttonPlusDetails.addEventListener("click", function () {
+    +countNumber++;
+    count.innerHTML = countNumber;
+    update(id, countNumber);
+  });
+  buttonMinusDetails.addEventListener("click", function () {
+    if (countNumber > 1) {
+      +countNumber--;
+      count.textContent = countNumber;
+      update(id, countNumber);
+    }
+  });
+  
+  buttonAdd.addEventListener("click", function () {
+    let choosenProduct = productsFlowers.find(product => product.id == id);
+    let existProduct = cart.find((product)=>product.id == id);
+    console.log('exist product cc' , existProduct);
+    if (existProduct) {
+      console.log("isexisting product");
+    } else{
+      cart.push({ ...choosenProduct, count: countNumber, total: 0 });
+      console.log("not existing product", cart);
+    }
+    countProduct.textContent = getTotalCount();
+    total.textContent = getTotalPrice();
+    localStorage.setItem("cart", JSON.stringify(cart));
+    getProducts();
+  });
+
+  let closeCardPro = document.querySelector(".close-card-product");
+  imgDetails.src = foundProduct.img;
+  imgDetails.alt = foundProduct.title;
+  nameProduct.textContent = foundProduct.title;
+  price.textContent = foundProduct.price;
+  details.style.cssText = "display:flex;";
+  closeCardPro.addEventListener("click", function () {
+    details.style.cssText = "display:none;";
+  });
+}
 countProduct.forEach((el) => {
   el.textContent = getTotalCount();
 });
