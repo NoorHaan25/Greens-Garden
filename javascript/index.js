@@ -120,7 +120,7 @@ function display(products) {
             <span class="new">New</span>
             <div class="icons-card">
                 <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-eye"></i>
+                <i class="fa-regular fa-eye" data-id="${product.id}"></i>
                 <i class="fa-solid fa-shuffle"></i>
             </div>
             <div class="img-card">
@@ -164,7 +164,7 @@ function display(products) {
           <span class="new">New</span>
           <div class="icons-card">
               <i class="fa-regular fa-heart"></i>
-              <i class="fa-regular fa-eye"></i>
+              <i class="fa-regular fa-eye" data-id="${product.id}"></i>
               <i class="fa-solid fa-shuffle"></i>
           </div>
           <div class="img-card">
@@ -233,10 +233,11 @@ function display(products) {
       }
     });
   });
-  buttonEye.forEach((el, index) => {
-    // console.log('eye' , index);
-    el.addEventListener("click", function () {
-      moreDetails(index);
+  buttonEye.forEach((el) => {
+    let id = el.dataset.id;
+    let index = el.dataset.index;
+    el.addEventListener("click", function() {
+    moreDetails(id);
     });
   });
   buttonHeart.forEach((el, index) => {
